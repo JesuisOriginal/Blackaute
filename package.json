@@ -1,20 +1,29 @@
 {
-  "name": "blackout",
+  "name": "bleckout",
   "version": "1.0.0",
-  "description": "lol, its a geopoint sistem for tracking barrels of beer 4 some1",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "run"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
   },
-  "keywords": [
-    "web",
-    "Firebase",
-    "Geopoint"
-  ],
-  "author": "Jesuis,Gio,Henricao",
-  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JesuisOriginal/Blackaut.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JesuisOriginal/Blackaut/issues"
+  },
+  "homepage": "https://github.com/JesuisOriginal/Blackaut#readme",
   "dependencies": {
-    "firebase-admin": "^8.12.1",
-    "require": "^2.4.20"
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "firebase": "^7.14.5",
+    "firebase-admin": "^8.12.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }
