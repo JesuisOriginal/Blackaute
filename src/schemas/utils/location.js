@@ -1,4 +1,4 @@
-const create = (latitude, longitude) = ({
+const create = (latitude, longitude) => ({
   latitude,
   longitude,
 });

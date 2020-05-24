@@ -19,7 +19,7 @@ routes.get('/server_test', (req, res) => {
 
 routes.get('/tickets', tickets.get);
 routes.post('/tickets', tickets.add);
-
+routes.get('/tickets/update',tickets.update);
 
 //create ticket
 // routes.post('/ticket', async (req, res) => {

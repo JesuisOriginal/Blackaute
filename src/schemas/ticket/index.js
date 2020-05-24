@@ -1,10 +1,11 @@
 // const location = require('../utils/location');
 const meta = require('../index');
 const { status } = require('./constants');
+const location = require('../utils/location');
 
-const schema = (productsIds = []) => ({
+const schema = (productsIds = [], lat, lon) => ({
   meta: meta('ticket'),
-  location: {},
+  location: location(lat,lon),
   productsIds,
   status: status[0]
 });
