@@ -4,6 +4,7 @@ const { content } = require('../server/db/index');
 const create = require('../schemas/product/index');
 
 const tickets = require('../controllers/tickets');
+const products = require('../controllers/products');
 
 const routes = Router();
 
@@ -20,6 +21,10 @@ routes.get('/server_test', (req, res) => {
 routes.get('/tickets', tickets.get);
 routes.post('/tickets', tickets.add);
 routes.get('/tickets/update',tickets.update);
+
+routes.get('/products',products.get);
+routes.get('/products/update',products.update);
+routes.post('/products',products.post);
 
 //create ticket
 // routes.post('/ticket', async (req, res) => {

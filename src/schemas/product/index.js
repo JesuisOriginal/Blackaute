@@ -1,10 +1,10 @@
-const schema = require('../index');
+const meta = require('../index');
 
-const create = (title, description = '', images = []) => ({
-  meta: schema('product'),
+const schema = (title, description = '', images = []) => ({
+  meta: meta('product'),
   title,
   description,
   images
 });
 
-module.exports = (create);
+module.exports = ({schema});

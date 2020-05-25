@@ -61,6 +61,12 @@ const post = async (newContent) => {
   });
 }
 
+// params = [
+//   {
+//     label:'element',
+//     value:ssss
+//   }
+// ]
 
 const update = async (schema, id, params) => {
   let toUpdate = (
@@ -81,6 +87,8 @@ const update = async (schema, id, params) => {
       content: []
     })
   }
+
+  params.el.meta.updated_at = new Date().toLocaleDateString();
 
   params.map(param => (
     toUpdate.el[param.label] = param.value
