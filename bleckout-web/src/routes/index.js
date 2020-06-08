@@ -6,11 +6,12 @@ import {
 } from 'react-router-dom';
 
 import MainPage from '../pages/Main';
+import AuthPage from '../pages/Auth';
 
 const Main = () => (
   <Route path='/'>
     <Route component={MainPage} />
-    <Route path='/login' component={() => <></>} />
+    <Route path='/login' component={AuthPage} />
     <Route path='/cadastro' component={() => <></>} />
   </Route>
 );
@@ -30,9 +31,9 @@ const Seller = () => (
 const Routes = () => (
   <Router>
     <Switch>
-      <Seller />
-      <Client />
       <Main />
+      <Client />
+      <Seller />
     </Switch>
   </Router>
 );
