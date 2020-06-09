@@ -7,11 +7,12 @@ import {
 
 import MainPage from '../pages/Main';
 import AuthPage from '../pages/Auth';
+import RegisterPage from '../pages/Register';
 
 const Main = () => (
   <Route path='/'>
-    <Route component={MainPage} />
-    <Route path='/login' component={AuthPage} />
+    <Route path='/' component={MainPage} exact/>
+    <Route path='/login' component={AuthPage} exact />
     <Route path='/cadastro' component={() => <></>} />
   </Route>
 );
@@ -29,7 +30,7 @@ const Seller = () => (
 );
 
 const Routes = () => (
-  <Router>
+  <Router >
     <Switch>
       <Main />
       <Client />
