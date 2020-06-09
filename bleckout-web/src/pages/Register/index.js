@@ -34,7 +34,11 @@ class Register extends React.Component {
     };
 
     componentDidMount() {
-        console.log(this.props)
+        const {logged_in, history} = this.props;
+        if(logged_in) {
+            history.push('/');
+        }
+        console.log('register',this.props)
     };
 
     methodsRenders = {

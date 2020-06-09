@@ -18,7 +18,7 @@ class Auth extends React.Component {
 
     componentDidMount() {
         const { logged_in, user, history } = this.props;
-        if (logged_in) {
+        if (logged_in && user.username) {
             history.push('/', {})
         }
     }
@@ -83,7 +83,13 @@ class Auth extends React.Component {
                     </Grid>
                     <Divider style={{ width: '100%', marginBottom: '20px', marginTop: '20px' }} />
                     <Grid item xs={12}>
-                        <Button className='register_btn' variant='outlined' color='secondary' onClick={this.navigateRegister} >REGSTRAR</Button>
+                        <Button
+                            className='register_btn'
+                            variant='outlined'
+                            color='secondary'
+                            onClick={this.navigateRegister} >
+                            REGISTRAR
+                            </Button>
                     </Grid>
                 </Grid>
             </View>
