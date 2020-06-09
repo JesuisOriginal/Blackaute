@@ -38,7 +38,7 @@ class Auth extends React.Component {
 
     navigateRegister = () => {
         const { history } = this.props;
-        history.push('/register')
+        history.push('/cadastro')
     }
 
     handleLogin = () => {
@@ -49,7 +49,7 @@ class Auth extends React.Component {
         console.log('login', this.props, this.state)
         return (
             <View>
-                <Grid container spacing={24} alignItems='center' justify='center' >
+                <Grid container spacing={2} alignItems='center' justify='center' >
                     <Grid item xs={12}>
                         <Typography
                             className='logo'
@@ -57,14 +57,14 @@ class Auth extends React.Component {
                             LOGO
                             </Typography>
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} lg={6}>
                         <Input
                             className='input_login'
                             placeholder='username'
                             id='login_username'
                             onChange={this.handleInputChange} />
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} lg={6}>
                         <Input
                             className='input_login'
                             placeholder='password'
@@ -86,17 +86,6 @@ class Auth extends React.Component {
                         <Button className='register_btn' variant='outlined' color='secondary' onClick={this.navigateRegister} >REGSTRAR</Button>
                     </Grid>
                 </Grid>
-
-                {/* <Card>
-                        <CardContent>
-                            <Grid container spacing={24}>
-                                <Grid item xs={4}>
-                                    <Typography variant='h3'>LOGIN</Typography>
-                                </Grid>
-                            </Grid>
-
-                        </CardContent>
-                    </Card> */}
             </View>
 
         )

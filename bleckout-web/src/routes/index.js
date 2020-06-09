@@ -13,7 +13,7 @@ const Main = () => (
   <Route path='/'>
     <Route path='/' component={MainPage} exact/>
     <Route path='/login' component={AuthPage} exact />
-    <Route path='/cadastro' component={() => <></>} />
+    <Route path='/cadastro' component={RegisterPage} />
   </Route>
 );
 

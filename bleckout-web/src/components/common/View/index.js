@@ -6,6 +6,7 @@ export default class View extends React.Component {
         const {direction='row', alignItems='center', justify='center'} = this.props;
         return(
             <Grid
+            className='view'
             container
             spacing={24}
             style={{
@@ -17,7 +18,7 @@ export default class View extends React.Component {
             alignItems={alignItems}
             justify={justify}
             >
-                <Grid item>
+                <Grid item xs={10} md={8} lg={6}>
                     {this.props.children}
                 </Grid>
             </Grid>
