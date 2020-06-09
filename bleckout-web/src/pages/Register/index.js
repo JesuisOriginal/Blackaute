@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import View from '../../components/common/View';
-import { Grid, Typography, Input, Button } from '@material-ui/core';
+import { Grid, Typography, Button } from '@material-ui/core';
 
 import PasswordForms from './components/PasswordForms';
 

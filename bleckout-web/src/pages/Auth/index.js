@@ -3,7 +3,13 @@ import { login } from '../../store/ducks/Auth';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import View from '../../components/common/View';
-import { Grid, Container, Card, CardContent, Typography, Input, Button, Divider } from '@material-ui/core';
+import {
+    Grid,
+    Typography,
+    Input,
+    Button,
+    Divider
+} from '@material-ui/core';
 
 import './styles.css';
 
