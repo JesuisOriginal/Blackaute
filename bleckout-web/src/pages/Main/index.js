@@ -20,6 +20,9 @@ class Main extends React.Component {
     if(!logged_id){
       history.push('/login',{data:'hello'})
     }
+    if(logged_id) {
+      history.push(`/${user.role}`);
+    }
   }
 
   render() {

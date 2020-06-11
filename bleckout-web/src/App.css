@@ -1,0 +1,8 @@
+.card {
+    border: 2px solid black;
+    border-radius: 0;
+}
+
+.card :hover {
+    background-color: #c6c6c6;
+}

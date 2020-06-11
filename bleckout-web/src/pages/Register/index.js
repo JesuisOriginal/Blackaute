@@ -24,10 +24,10 @@ class Register extends React.Component {
         this.setState({ method: value })
     };
 
-    handleUpdateForms = (type,value) => {
+    handleUpdateForms = (type, value) => {
         this.setState({
             ...this.state,
-            forms:{
+            forms: {
                 ...this.state.forms,
                 [type]: value,
             }
@@ -39,11 +39,11 @@ class Register extends React.Component {
     }
 
     componentDidMount() {
-        const {logged_in, history} = this.props;
-        if(logged_in) {
+        const { logged_in, history } = this.props;
+        if (logged_in) {
             history.push('/');
         }
-        console.log('register',this.props)
+        console.log('register', this.props)
     };
 
     methodsRenders = {
@@ -54,7 +54,7 @@ class Register extends React.Component {
     render() {
         console.log(this.state)
         return (
-            <View>
+            <>
                 {!this.state.method.length ?
                     <Grid container spacing={2} alignItems='center' justify='space-between' direction='row' >
                         <Grid item xs={12}>
@@ -88,7 +88,7 @@ class Register extends React.Component {
                         </Grid>
                     </Grid>
                     : this.methodsRenders[this.state.method]}
-            </View>
+            </>
         )
     }
 };

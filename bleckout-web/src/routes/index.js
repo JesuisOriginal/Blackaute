@@ -10,50 +10,56 @@ import AuthPage from '../pages/Auth';
 import RegisterPage from '../pages/Register';
 import { connect } from 'react-redux';
 
+import SellerHome from '../pages/Home/Seller';
+
+import NavBar from '../components/NavBar';
+import View from '../components/common/View';
+
 const Main = () => (
   <Route path='/'>
-    <Route path='/' component={MainPage} exact/>
+    <Route path='/' component={MainPage} exact />
     <Route path='/login' component={AuthPage} exact />
     <Route path='/cadastro' component={RegisterPage} />
   </Route>
 );
 
 const Client = () => (
-  <Route path='/'>
-    <Route path='/produtos' component={() => <></>} />
-  </Route>
+  <>
+    <Route path='/' component={() => <>hello</>} />
+  </>
 );
 
 const Seller = () => (
   <Route path='/'>
-    <Route path='/produtos' component={() => <></>} />
+    <Route path='/' component={SellerHome} />
   </Route>
 );
 
-const Application = ({role = null}) => (
-  <Router >
-    <Switch>
-      <Main />
-      {role === 'client' && <Client />}
-      {role === 'seller' && <Seller />}
-    </Switch>
-  </Router>
+const Application = ({ content }) => (
+    <Router >
+      <Switch>
+        {!content.logged_id && <Main />}
+        {content.user && content.user.role === 'client' && <Client />}
+        {content.user && content.user.role === 'seller' && <Seller />}
+      </Switch>
+    </Router>
 );
 
 
 class Routes extends React.Component {
   render() {
     console.log('route', this.props);
-    return(
-      <Application user={this.props} />
+    return (
+      <View  logged={this.props.logged_id} history={this.props.history}>
+        <Application content={this.props} />
+      </ View>
     )
   }
 }
 
-const mapStateToProps = ({AuthReducer}) => {
-  const {user} = AuthReducer;
-  return(
-    user
+const mapStateToProps = ({ AuthReducer }) => {
+  return (
+    AuthReducer
   )
 }
 

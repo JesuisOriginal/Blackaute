@@ -1,6 +1,7 @@
 import React from 'react';
 import {Grid, Box} from '@material-ui/core';
 import Theme from '../../../themes';
+import NavBar from '../../NavBar';
 
 export default class View extends React.Component {
     render() {
@@ -11,8 +12,9 @@ export default class View extends React.Component {
                 <Grid
                 className='view'
                 container
-                spacing={1}
+                spacing={4}
                 style={{
+                    flex:1,
                     width:'100%',
                     height:'100%',
                     position:'absolute',
@@ -22,7 +24,9 @@ export default class View extends React.Component {
                 alignItems={alignItems}
                 justify={justify}
                 >
-                    <Grid item xs={10} md={8} lg={6}>
+                    {this.props.logged && 
+                    <Grid item><NavBar /></Grid>}
+                    <Grid item md={12} lg={6}>
                         {this.props.children}
                     </Grid>
                 </Grid>

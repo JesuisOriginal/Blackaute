@@ -10,8 +10,8 @@ const INTIAL_STATE = {
 
 const reducer = (state = INTIAL_STATE, action) => {
   switch (action.type) {
-    case Types.LOGIN:
-      return login(state,action.user);
+    case 'LOGIN':
+      return {...state, user: action.user, logged_id: true};
     case Types.LOGOUT:
       return logout(state);
     default:
@@ -19,13 +19,18 @@ const reducer = (state = INTIAL_STATE, action) => {
   }
 };
 
-export const login = (state,user) => ({
-  ...state,
-  user,
-  logged_id: true
-});
+export const login = (state,action) => {
+  console.log('action',action)
+  return ({
+    type: Types.LOGIN,
+    ...state,
+    user: action.user,
+    logged_id: true,
+  })
+};
 
 export const logout = (state) => ({
+  type: Types.LOGOUT,
   ...state,
   user: {},
   logged_id: false
