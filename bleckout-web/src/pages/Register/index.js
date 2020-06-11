@@ -5,6 +5,7 @@ import View from '../../components/common/View';
 import { Grid, Typography, Button } from '@material-ui/core';
 
 import PasswordForms from './components/PasswordForms';
+import VoucherForms from './components/VoucherForms';
 
 import './styles.css';
 
@@ -33,6 +34,10 @@ class Register extends React.Component {
         })
     };
 
+    handleSubmit() {
+        return null
+    }
+
     componentDidMount() {
         const {logged_in, history} = this.props;
         if(logged_in) {
@@ -42,9 +47,9 @@ class Register extends React.Component {
     };
 
     methodsRenders = {
-        voucher: <div />,
-        password: <PasswordForms onChange={this.handleUpdateForms} />
-    }
+        voucher: <VoucherForms onChange={this.handleUpdateForms} onSubmit={this.handleSubmit} />,
+        password: <PasswordForms onChange={this.handleUpdateForms} onSubmit={this.handleSubmit} />
+    };
 
     render() {
         console.log(this.state)

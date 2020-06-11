@@ -8,6 +8,7 @@ import {
 import MainPage from '../pages/Main';
 import AuthPage from '../pages/Auth';
 import RegisterPage from '../pages/Register';
+import { connect } from 'react-redux';
 
 const Main = () => (
   <Route path='/'>
@@ -29,14 +30,31 @@ const Seller = () => (
   </Route>
 );
 
-const Routes = () => (
+const Application = ({role = null}) => (
   <Router >
     <Switch>
       <Main />
-      <Client />
-      <Seller />
+      {role === 'client' && <Client />}
+      {role === 'seller' && <Seller />}
     </Switch>
   </Router>
 );
 
-export default Routes;
+
+class Routes extends React.Component {
+  render() {
+    console.log('route', this.props);
+    return(
+      <Application user={this.props} />
+    )
+  }
+}
+
+const mapStateToProps = ({AuthReducer}) => {
+  const {user} = AuthReducer;
+  return(
+    user
+  )
+}
+
+export default connect(mapStateToProps)(Routes);
