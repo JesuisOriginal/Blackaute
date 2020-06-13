@@ -102,3 +102,31 @@ dist
 
 # TernJS port file
 .tern-port
+
+#sec
+qr-app\src\pages\tcptest.js
+qr-app\src\init-firebase.js
+
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+qr-app/node_modules
+qr-app/.pnp
+.pnp.js
+
+# testing
+qr-app/coverage
+
+# production
+qr-app/build
+
+# misc
+qr-app/.DS_Store
+qr-app/.env.local
+qr-app/.env.development.local
+qr-app/.env.test.local
+qr-app/.env.production.local
+
+qr-app/npm-debug.log*
+qr-app/yarn-debug.log*
+qr-app/yarn-error.log*
