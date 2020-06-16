@@ -1,7 +1,7 @@
-import firestore from '../config';
+import firebase from 'firebase';
 
-export const create = ({latitude,longitude}) => (
-    new firestore.GeoPoint(latitude, longitude)
+export const generate = ({coords}) => (
+    new firebase.firestore.GeoPoint(coords.latitude, coords.longitude)
 )
 
 // new firebase.firestore.GeoPoint(position.coords.latitude, position.coords.longitude)

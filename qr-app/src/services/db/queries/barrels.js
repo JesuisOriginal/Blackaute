@@ -1,12 +1,12 @@
 import { products } from "../storage";
-import { create } from "../utils/geopoint";
+import { generate } from "../utils/geopoint";
 
-export function update(position, docName) {
-  var newDoc = products.doc("QR" + docName);
+export async function update(position, docName) {
+  var newDoc = await products.doc("QR" + docName);
   console.log("new doc of name: ", docName);
-  newDoc
+  await newDoc
     .set({
-      location: create(position.coords),
+      location: generate(position),
     })
     .then(function () {
       console.log("Barrel Added, check Firebase Console...");
