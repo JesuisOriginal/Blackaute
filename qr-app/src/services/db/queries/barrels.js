@@ -3,10 +3,11 @@ import { generate } from "../utils/geopoint";
 
 export async function update(position, docName) {
   var newDoc = await products.doc("QR" + docName);
+  console.log('NewDOc',newDoc);
   console.log("new doc of name: ", docName);
   await newDoc
     .set({
-      location: generate(position),
+      location: await generate(position),
     })
     .then(function () {
       console.log("Barrel Added, check Firebase Console...");

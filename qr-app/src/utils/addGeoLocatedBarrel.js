@@ -5,7 +5,10 @@ import {update} from '../services/db/queries/barrels';
 export default function addGeoLocatedBarrel(jsonString) {
   if (navigator.geolocation) {
     const docName = makeid(4);
-    navigator.geolocation.getCurrentPosition(update);
+    
+    const updateDoc = (position) => update(position, docName);
+
+    navigator.geolocation.getCurrentPosition(updateDoc);
 
     var name = "QR" + docName;
     console.log(">Name : " + docName);
