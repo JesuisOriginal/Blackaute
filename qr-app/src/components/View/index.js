@@ -20,6 +20,5 @@ const styles = {
   width: '100%',
   backgroundColor: MainTheme.colors.background,
   position: 'absolute',
-  overflow: 'hidden',
-
+  overflow: 'scroll',
 };

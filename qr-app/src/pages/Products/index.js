@@ -1,6 +1,8 @@
 import React from "react";
 import View from "../../components/View";
 import { index } from "../../services/db/queries/barrels";
+import Barrels from "../../components/Barrels";
+import OverflowScrolling from 'react-overflow-scrolling';
 
 class ProductsPage extends React.Component {
   constructor(props) {
@@ -22,10 +24,29 @@ class ProductsPage extends React.Component {
     this.handleGetProducts();
   }
 
+  handleOverflowChange(isOverflowed) {
+    console.log(isOverflowed);
+  }
+
+
   render() {
     console.log(this.state.products);
-    return <View></View>;
+    return (
+       
+        <View>
+            <div style={divStyle}>
+              <Barrels itens={this.state.products}/>
+            </div>
+
+        </View>
+        
+      );
   }
 }
+
+const divStyle = {
+  overflowY : 'scroll',
+}
+
 
 export default ProductsPage;
