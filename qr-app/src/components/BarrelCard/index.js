@@ -4,6 +4,9 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
+import image from './barrel.png';
+import { Button } from '@material-ui/core';
+import AddLocationIcon from '@material-ui/icons/AddLocation';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,11 +27,16 @@ const useStyles = makeStyles((theme) => ({
     display: 'block',
     maxWidth: '100%',
     maxHeight: '100%',
+    objectFit: 'contain'
   },
 }));
 
 export default function BarrelCard(props) {
   const classes = useStyles();
+
+  let gitLoc = () => {
+    console.log('essa função deve encaminhar para uma rota que mostre um mapa e a posição autal do barril');
+  }
 
   return (
     <div className={classes.root}>
@@ -36,7 +44,7 @@ export default function BarrelCard(props) {
         <Grid container spacing={2}>
           <Grid item>
             <ButtonBase className={classes.image}>
-              <img className={classes.img} alt="complex" src="barrel.png"/>
+              <img className={classes.img} alt="complex" src={image}/>
             </ButtonBase>
           </Grid>
           <Grid item xl={12} sm container>
@@ -53,14 +61,16 @@ export default function BarrelCard(props) {
                 </Typography>
               </Grid>
               <Grid item>
-                <Typography variant="body2" style={{ cursor: 'pointer' }}>
-                  Remove
-                </Typography>
+              <Button
+                variant="contained"
+                color="default"
+                startIcon={<AddLocationIcon />}
+                onClick={gitLoc}
+              >
+                Localização Atual
+              </Button>
               </Grid>
             </Grid>
-            {/* <Grid item>
-              <Typography variant="subtitle1">$19.00</Typography>
-            </Grid> */}
           </Grid>
         </Grid>
       </Paper>
