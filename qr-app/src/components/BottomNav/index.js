@@ -28,6 +28,8 @@ export default function SimpleBottomNavigation() {
   );
 }
 
+//Change to zIndex from 2 to 10 by Henrique
+
 const styles = {
   container: {
     position: 'fixed',
