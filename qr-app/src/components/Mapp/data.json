@@ -1,0 +1,26 @@
+{"locations" : [
+    {
+        "name": "Minha Casa",
+        "id": 1,
+        "coord": {
+            "lat" : -8.136134,
+            "lng" : -34.901712
+        }
+    },
+    {
+        "name": "ekaut",
+        "id": 2,
+        "coord": {
+            "lat" : -7.966406,
+            "lng" : -34.920228
+        }
+    },
+    {
+        "name": "Cesar",
+        "id": 3,
+        "coord": {
+            "lat" : -8.059641,
+            "lng" : -34.872255
+        }
+    }
+]}
