@@ -1,0 +1,22 @@
+.routes_container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+};
+
+.main {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.nav {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    position: fixed;
+    bottom: 0;
+    z-index: 2;
+    padding: 2rem;
+    background-color: #fff;
+}
