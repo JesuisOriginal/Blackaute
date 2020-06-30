@@ -161,7 +161,7 @@ export default function BuyCard(props) {
                     <InputLabel htmlFor="outlined-rem-native-simple">Remetente</InputLabel>
                     <Select
                     native
-                    value={state.qtd}
+                    value={state.rem}
                     onChange={handleChange}
                     label="Remetente"
                     inputProps={{
@@ -170,20 +170,18 @@ export default function BuyCard(props) {
                     }}
                     >
                     <option aria-label="None" value="" />
-                    <option value={1}>1</option>
-                    <option value={2}>2</option>
-                    <option value={3}>3</option>
-                    <option value={4}>4</option>
-                    <option value={5}>5</option>
-                    <option value={6}>6</option>
-                    <option value={7}>7</option>
-                    <option value={8}>8</option>
-                    <option value={9}>9</option>
-                    <option value={10}>10</option>
-
+                    <option value={'Bar do Gordo'}>Bar do Gordo</option>
+                    <option value={'big'}>Bigbompreço</option>
+                    <option value={'Hyper Casa Forte'}>Hyper Casa Forte</option>
+                    <option value={'ceu'}>Casa de Jesus</option>
+                    <option value={'henricao'}>Casa de Henricao</option>
+                    <option value={'Agluglu'}>Casa de Gio</option>
                     </Select>
                 </FormControl>
                 </Grid>
+                <Typography>
+                    ps: isso é um barril!!
+                </Typography>
                 <Grid item>
                 <Button className={classes.comprar}>
                     Comprar
