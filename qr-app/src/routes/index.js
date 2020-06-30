@@ -7,6 +7,7 @@ import BottomNav from '../components/BottomNav';
 import ProductsPage from '../pages/Products';
 import MapPage from '../pages/MapPage';
 import AuthPage from '../pages/Auth';
+import Market from '../pages/Market';
 
 import {Grid} from '@material-ui/core';
 import {Home, CropFree, Toc} from '@material-ui/icons';
@@ -39,6 +40,13 @@ const DEFAULT_ROUTES = [
     icon: Toc,
     name:'Barris',
     component: ProductsPage
+  },
+  {
+    path: '/market',
+    exact: true,
+    icon: Toc,
+    name:'Market',
+    component: Market
   },
   {
     path: '/map',
