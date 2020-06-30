@@ -18,6 +18,7 @@ import americanIpa from './american-ipa.png';
 import munich from './munich.png';
 import witbier from './witbier.png';
 import czech from './czech.png';
+import barrel from './barrel.png';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -88,12 +89,6 @@ export default function BuyCard(props) {
 
 
 
-    const imgsrc = "./";
-    const test = imgsrc + 'munich.png' ;
-    const selectImage = (image) => {return (imgsrc + image + '.png')};
-
-
-
     return (
     <div className={classes.root}>
         <Paper className={classes.paper}>
@@ -101,7 +96,7 @@ export default function BuyCard(props) {
             <Grid item>
             <ButtonBase className={classes.image}>      
                 {/* TODO: pqp mano vai se fuder link bugado do caralho pra imagem */}
-                <img className={classes.img} alt="complex" src={apa} />
+                <img className={classes.img} alt="complex" src={barrel} />
             </ButtonBase>
             </Grid>
             <Grid item xs={12} sm container>
@@ -178,15 +173,6 @@ export default function BuyCard(props) {
                     <option value={'Agluglu'}>Casa de Gio</option>
                     </Select>
                 </FormControl>
-                </Grid>
-                <Typography>
-                    ps: isso é um barril!!
-                </Typography>
-                <Grid item>
-                <Button className={classes.comprar}>
-                    Comprar
-                    {/* TODO: enviar pro bd */}
-                </Button>
                 </Grid>
             </Grid>
             <Grid item>

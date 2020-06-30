@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import {connect} from 'react-redux';
 import Products from "../../components/Products";
 import FabAddCartItem from "../../components/FabAddCartItem";
-import { makeStyles, Grid } from "@material-ui/core";
+import { makeStyles, Grid, Button } from "@material-ui/core";
 // import classes from "*.module.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -16,29 +16,50 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
         color: theme.palette.text.secondary,
       },
+      button:{
+        padding: theme.spacing(2),
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+      }
     },
 
-  }));
+}));
 
-class Market extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-          loading: false,
-        };
-      }
 
-    render() {
-    // const {Products} = this.props;
-    return (
-        
-        <div>
-            <FabAddCartItem />
-            <Products  />
-        </div>
-        
-        );
-    }
+export default function Market() {
+    const classes = useStyles();
+
+    const [state, setState] = useState(
+        {
+            children:[],
+        }
+    );
+
+    const appendChild = () => {
+      this.setState({
+          
+          children: [
+              ...children,
+              <Products />
+          ]
+      });
+  }
+
+  const test = () => {
+      console.log("Clicado");
+  }
+
+
+  return (
+            
+    <div>
+        <FabAddCartItem onClick={console.log("Clicado")}/>
+        <Products  />
+        <Button variant="contained" color="secondary"  padding='20px' onClick={this.appendChild}>
+            Comprardsadasdasds
+        </Button>
+    </div>
+    
+    );
 }
 
-export default Market;
