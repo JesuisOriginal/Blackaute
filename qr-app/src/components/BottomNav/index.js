@@ -5,13 +5,10 @@ import { Grid, Button } from "@material-ui/core";
 import {CropFree, Home, List} from '@material-ui/icons'
 import MainTheme from '../../themes/constants';
 
-export default function SimpleBottomNavigation() {
+export default function SimpleBottomNavigation(props) {
   const [value, setValue] = React.useState(0);
 
-  const paths = [
-    '/reader',
-    '/'
-  ]
+  console.log('nav', props);
   
   return (
     <Grid container direction='row' style={styles.container} justify='center' alignItems='center'>

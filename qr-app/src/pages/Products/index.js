@@ -1,26 +1,34 @@
 import React from "react";
+import {connect} from 'react-redux';
 import View from "../../components/View";
 import { index } from "../../services/db/queries/barrels";
 import Barrels from "../../components/Barrels";
+import FabUpdate from '../../components/FabUpdate';
+
+import {Types} from '../../store/reducers/main';
 
 class ProductsPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      products: [],
+      loading: false,
     };
   }
 
   handleAdd = (item) => {
-    this.setState({ products: [...this.state.products, item] });
+    const {dispatch} = this.props;
+    dispatch({type: Types.addBarrel, barrel: item});
   };
 
   handleGetProducts = async () => {
+    this.setState({loading: true});
     await index(this.handleAdd);
+    this.setState({loading: false});
   };
 
   componentDidMount() {
-    this.handleGetProducts();
+    const {barrels} = this.props;
+    if(!barrels || !barrels.length) this.handleGetProducts();
   }
 
   handleOverflowChange(isOverflowed) {
@@ -29,11 +37,12 @@ class ProductsPage extends React.Component {
 
 
   render() {
-    console.log(this.state.products);
+    const {barrels} = this.props;
     return (
        
         <View>
-          <Barrels itens={this.state.products}/>
+          <FabUpdate onClick={this.handleGetProducts} loading={this.state.loading} />
+          <Barrels itens={barrels} />
         </View>
         
       );
@@ -41,8 +50,12 @@ class ProductsPage extends React.Component {
 }
 
 const divStyle = {
-  overflow : 'scroll',
+  overflow : 'auto',
 }
 
+const mapStateToProps = ({MainReducer}) => ({
+  barrels: MainReducer.barrels
+})
 
-export default ProductsPage;
+
+export default connect(mapStateToProps)(ProductsPage);
