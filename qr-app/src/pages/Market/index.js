@@ -53,7 +53,7 @@ export default function Market() {
             
     <div>
         <FabAddCartItem onClick={console.log("Clicado")}/>
-        <Products  />
+        {/* <Products  /> */}
         <Button variant="contained" color="secondary"  padding='20px' onClick={appendChild}>
             Comprardsadasdasds
         </Button>

@@ -1,0 +1,30 @@
+.nav_container {
+    height: 100%;
+    width: 8rem;
+    background-color: white;
+    z-index: 10;
+    position: fixed;
+};
+
+.nav_logo {
+    height: 200px;
+    width: auto;
+}
+
+.nav_opts {
+
+}
+
+.nav_item {
+    color: #c8c8c8;
+    height: 100px;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+};
+
+.nav_item :hover {
+    color: yellow;
+}

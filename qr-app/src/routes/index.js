@@ -8,24 +8,25 @@ import ProductsPage from '../pages/Products';
 import MapPage from '../pages/MapPage';
 import AuthPage from '../pages/Auth';
 import Market from '../pages/Market';
+import SideNav from '../components/SideNav';
 
-import {Grid} from '@material-ui/core';
+import {Grid, Drawer} from '@material-ui/core';
 import {Home, CropFree, Toc} from '@material-ui/icons';
 
 const DEFAULT_ROUTES = [
-  {
-    path: '/auth',
-    exact: true,
-    name: 'Auth',
-    // icon:'login',
-    component: AuthPage
-  },
   {
     path: '/',
     exact: true,
     icon:Home,
     name:'Home',
     component: HomePage
+  },
+  {
+    path: '/auth',
+    exact: true,
+    name: 'Auth',
+    // icon:'login',
+    component: AuthPage
   },
   {
     path: '/reader',
@@ -83,17 +84,30 @@ export default class RootRoute extends React.Component {
     });
   }
 
+  styles = () => (
+    this.state.screenType ? ({
+      'padding': 0,
+    }) : ({
+      'paddingLeft': '8rem',
+    })
+  )
+
   render() {
     const {routes, screenType} = this.state;
     console.log(screenType)
     return (
       <Router>
-        <Switch>
-          {routes.map((route, index) => (
-            <Route key={`route_${index}`} path={route.path} exact={route.exact} component={route.component} />
-          ))}
-        </Switch>
-        <BottomNav {...this.state} screenType={screenType}/>
+            <div style={{
+              paddingLeft: screenType ? '' : '8rem',
+              paddingBottom: screenType ? '2rem' :'',
+            }}>
+              <Switch>
+                {routes.map((route, index) => (
+                  <Route key={`route_${index}`} path={route.path} exact={route.exact} component={route.component} />
+                  ))}
+              </Switch>
+          </div>
+          {screenType ? <BottomNav {...this.state} screenType={screenType}/>:<SideNav />}
       </Router>
     );
   }
