@@ -51,11 +51,15 @@ class ProductsPage extends React.Component {
 
 const divStyle = {
   overflow : 'auto',
-}
+};
 
 const mapStateToProps = ({MainReducer}) => ({
   barrels: MainReducer.barrels
-})
+});
+
+// const mapDispatchToProps = dispatch => ({
+//   addBerrls: () => 
+// })
 
 
 export default connect(mapStateToProps)(ProductsPage);

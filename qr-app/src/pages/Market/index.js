@@ -25,25 +25,24 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
+const INITIAL_STATE = {
+  children:[],
+};
+
 
 export default function Market() {
-    const classes = useStyles();
+  // const classes = useStyles();
+  const [state, setState] = useState(INITIAL_STATE);
 
-    const [state, setState] = useState(
-        {
-            children:[],
-        }
-    );
-
-    const appendChild = () => {
-      this.setState({
-          
-          children: [
-              ...children,
-              <Products />
-          ]
-      });
-  }
+  const appendChild = ()=> (
+    setState({
+      ...state,
+      children:[
+        ...state.children,
+        Products
+      ]
+    })
+  )
 
   const test = () => {
       console.log("Clicado");
@@ -55,9 +54,10 @@ export default function Market() {
     <div>
         <FabAddCartItem onClick={console.log("Clicado")}/>
         <Products  />
-        <Button variant="contained" color="secondary"  padding='20px' onClick={this.appendChild}>
+        <Button variant="contained" color="secondary"  padding='20px' onClick={appendChild}>
             Comprardsadasdasds
         </Button>
+        {state.children.map(Child=> <Child />)}
     </div>
     
     );
