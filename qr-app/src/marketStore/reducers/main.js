@@ -28,6 +28,8 @@ export const addOrder = (state, { orders }) => ({
     ...state,
     orders: [
       ...state.orders,
-      order
+      orders
     ]
 });
+
+// export const getOrders = (state, { orders })

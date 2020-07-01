@@ -121,16 +121,15 @@ export default function BuyCard(props) {
 
     const handleChange = (event) => {
       const name = event.target.name;
-    //   const src = event.target.imgSrc;
       const name2 = event.target.name2;
-      // console.log("selected img:", imgSlct[state[name]]);
       setState({
         ...state,
         [name]: event.target.value,
         [name2]: event.target.value
-        // [src]: event.target.value
-        // [cost]: event.target
       });
+      if (state.tipo && state.qtd && state.rem && state.volume) {
+        // TODO something
+      }
     };
 
     const handleQtd = (event) => {

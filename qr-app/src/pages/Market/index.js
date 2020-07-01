@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import {connect} from 'react-redux';
 import Products from "../../components/Products";
 import FabAddCartItem from "../../components/FabAddCartItem";
-import { makeStyles, Grid, Button } from "@material-ui/core";
+import { makeStyles, Grid, Button, Typography } from "@material-ui/core";
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 // import classes from "*.module.css";
+import {Provider} from 'react-redux';
+
+import marketStore from '../../marketStore';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -68,19 +71,22 @@ export default function Market() {
 
 
   return (
-            
-    <div>
-        {/* <FabAddCartItem onClick={console.log("Clicado")}/> */}
-        <Fab style={fabStyle} variant={'round'} size={'medium'} color="secondary" onClick={appendChild} aria-label="add">
-            <AddIcon />
-        </Fab>
-        <Products  />
-        <Button style={buttonStyle} variant="contained" color="secondary"  >
-            Comprar
-        </Button>
-        {state.children.map(Child=> <Child />)}
-    </div>
-    
+    // <Provider store={marketStore}>     
+      <div>
+          {/* <FabAddCartItem onClick={console.log("Clicado")}/> */}
+          <Fab style={fabStyle} variant={'round'} size={'medium'} color="secondary" onClick={appendChild} aria-label="add">
+              <AddIcon />
+          </Fab>
+          {/* <Products  /> */}
+          <Button style={buttonStyle} variant="contained" color="secondary"  >
+              Comprar
+          </Button>
+          {/* <Typography>
+            {state.children[0].state.tipo}
+          </Typography> */}
+          {state.children.map(Child=> <Child />)}
+      </div>
+    // </Provider>    
     );
 }
 
