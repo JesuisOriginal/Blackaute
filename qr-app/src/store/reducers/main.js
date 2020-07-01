@@ -39,17 +39,17 @@ export default function reducer(state = INITIAL_STATE, action) {
     }
 };
 
-export const updateUser = (state, {user}) => ({
+const updateUser = (state, {user}) => ({
     ...state,
     user
 });
 
-export const updateRequests = (state, {requests}) => ({
+const updateRequests = (state, {requests}) => ({
     ...state,
     requests
 });
 
-export const updateSingleRequest = (state, {index, data}) => ({
+const updateSingleRequest = (state, {index, data}) => ({
     ...state,
     requests:[
         ...state.requests[index],
@@ -57,17 +57,17 @@ export const updateSingleRequest = (state, {index, data}) => ({
     ],
 });
 
-export const addRequest = (state, {data}) => ({
+const addRequest = (state, {data}) => ({
     ...state,
     requests:[...state.requests, data]
 });
 
-export const updateBarrels = (state, {barrels}) => ({
+const updateBarrels = (state, {barrels}) => ({
     ...state,
     barrels
 });
 
-export const updateSingleBarrel = (state, {index, data}) => ({
+const updateSingleBarrel = (state, {index, data}) => ({
     ...state,
     barrels:[
         ...state.barrels[index],
@@ -75,12 +75,12 @@ export const updateSingleBarrel = (state, {index, data}) => ({
     ]
 });
 
-export const addBarrel = (state, {barrel}) => ({
+const addBarrel = (state, {barrel}) => ({
     ...state,
     barrels:[...state.barrels, barrel]
 });
 
-export const updateLoading = (state, {loading}) => ({
+const updateLoading = (state, {loading}) => ({
     ...state,
     loading
 });

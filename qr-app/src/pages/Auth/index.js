@@ -11,7 +11,6 @@ class AuthPage extends React.Component {
 
     componentDidMount() {
         const {user, history} = this.props;
-        
         if(user.username) {
             history.push('/');
         }

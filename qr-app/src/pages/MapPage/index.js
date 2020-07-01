@@ -7,7 +7,6 @@ class MapPage extends Component {
     render() {
         return (
             <View>
-                {/* <Mapp style={{height: '100%', width: '100%'}}/> */}
                 <Pedidos />
             </View>
         )

@@ -1,56 +1,57 @@
 import React, {useState} from 'react';
 import {GoogleMap , withScriptjs, withGoogleMap, Marker, InfoWindow } from 'react-google-maps';
 import * as data from './data.json';
+import { useSelector } from 'react-redux';
 
+const ProtoMapp = (props) => {
 
-const createCenter = () => {
-    let lat = 0;
-    let lng = 0;
-    let l = data.locations.length;
-    for(let i = 0; i < l; i++) {
-        lat += data.locations[i].coord.lat;
-        lng += data.locations[i].coord.lng;
+    const barris = useSelector(state => state.OrdersReducer.activeBarril);
+    const [selectedLoc, setSelectedLoc] = useState(null);
+
+    const createCenter = () => {
+        console.log(barris, [1,2,3,4]);
+        let lat = 0;
+        let lng = 0;
+        let l = barris.length;
+        for(let i = 0; i < l; i++) {
+            lat += barris[i].description.coord.lat;
+            lng += barris[i].description.coord.lng;
+        }
+    
+        return {lat : (lat/l) , lng: (lng/l)}
     }
 
-    return {lat : (lat/l) , lng: (lng/l)}
-}
-
-
-function LambdaMap() {
-    const [selectedLoc, setSelectedLoc] = useState(null);
     let center = createCenter();
+
     return (
         <GoogleMap 
             defaultZoom={10} 
             defaultCenter= {{lat: center.lat , lng: center.lng}}
         >
-            {data.locations.map( item => (
+            {barris.map( item => (
                 <Marker 
-                    key={item.id}
+                    key={item.meta.id}
                     position={{
-                        lat: item.coord.lat,
-                        lng: item.coord.lng
+                        lat: item.description.coord.lat,
+                        lng: item.description.coord.lng
                     }}
                     onClick={() => {
                         setSelectedLoc(item);
                     }}
-                    // icon={{
-                    //     url : ''
-                    // }}
                 ></Marker>
             ))}
             {selectedLoc && (
                 <InfoWindow 
                     position={{
-                        lat: selectedLoc.coord.lat,
-                        lng: selectedLoc.coord.lng
+                        lat: selectedLoc.description.coord.lat,
+                        lng: selectedLoc.description.coord.lng
                     }}
                     onCloseClick={() => {
                         setSelectedLoc(null);
                     }}
                 >
                     <div>
-                        <h1>{selectedLoc.name}</h1>
+                        <h1>{selectedLoc.content.name}</h1>
                     </div>
                 </InfoWindow>
             )}
@@ -58,7 +59,5 @@ function LambdaMap() {
     )
 }
 
-let ProtoMapp  = withScriptjs(withGoogleMap(LambdaMap));
-
-export default ProtoMapp;
+export default withScriptjs(withGoogleMap(ProtoMapp));
 
