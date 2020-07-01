@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import Products from "../../components/Products";
 import FabAddCartItem from "../../components/FabAddCartItem";
 import { makeStyles, Grid, Button } from "@material-ui/core";
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 // import classes from "*.module.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -10,20 +12,36 @@ const useStyles = makeStyles((theme) => ({
       '& > *': {
         margin: theme.spacing(1),
         width: '25ch',
-      },
-      paper: {
-        padding: theme.spacing(2),
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
-      },
-      button:{
-        padding: theme.spacing(2),
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
       }
     },
-
+    paper: {
+      padding: theme.spacing(2),
+      textAlign: 'center',
+      color: theme.palette.text.secondary,
+    },
+    
 }));
+
+const buttonStyle = {
+      padding: "1rem",
+      right: '20rem',
+      textAlign: 'center',
+      margin: 0,
+      bottom: 'auto',
+      right: 20,
+      top: 20,
+      left: 'auto',
+      position: 'fixed',
+      // color: theme.palette.text.secondary,
+}
+const fabStyle = {
+  margin: 0,
+  top: 'auto',
+  right: 20,
+  bottom: 20,
+  left: 'auto',
+  position: 'fixed',
+};
 
 const INITIAL_STATE = {
   children:[],
@@ -31,7 +49,7 @@ const INITIAL_STATE = {
 
 
 export default function Market() {
-  // const classes = useStyles();
+  const classes = useStyles();
   const [state, setState] = useState(INITIAL_STATE);
 
   const appendChild = ()=> (
@@ -52,10 +70,13 @@ export default function Market() {
   return (
             
     <div>
-        <FabAddCartItem onClick={console.log("Clicado")}/>
+        {/* <FabAddCartItem onClick={console.log("Clicado")}/> */}
+        <Fab style={fabStyle} variant={'round'} size={'medium'} color="secondary" onClick={appendChild} aria-label="add">
+            <AddIcon />
+        </Fab>
         <Products  />
-        <Button variant="contained" color="secondary"  padding='20px' onClick={appendChild}>
-            Comprardsadasdasds
+        <Button style={buttonStyle} variant="contained" color="secondary"  >
+            Comprar
         </Button>
         {state.children.map(Child=> <Child />)}
     </div>

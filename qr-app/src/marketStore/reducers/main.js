@@ -1,22 +1,33 @@
+const INITIAL_STATE = {
+    orders:[],
+    // sentStatus: false
+};
+
+// export default function(state = false, action) {
+//     if (action.type === 'SET_SENT_STATUS') {
+//         return action.sentStatus;
+//     } else {
+//         return state;
+//     }
+// }
+
+// a funcao do reducer ja adiciona um state novo ao historico
+// a funcao select ja pega automatico o ultimo state
+
+// TODO: fazer uma action type = 'sent' que limpa orders pra uma lista vazia, ou volta pro estado inicial
 export default function reducer(state = INITIAL_STATE, action) {
     switch(action.type) {
-        case Types.updateUser:
-            return updateUser(state, action);
-        case Types.updateRequests: 
-            return updateRequests(state, action);
-        case Types.updateSingleRequest:
-            return updateSingleRequest(state, action);
-        case Types.addRequest:
-            return addRequest(state, action);
-        case Types.updateBarrels:
-            return updateBarrels(state, action);
-        case Types.updateSingleBarrel:
-            return updateSingleBarrel(state, action);
-        case Types.addBarrel:
-            return addBarrel(state, action);
-        case Types.updateLoading:
-            return updateLoading(state, action);
+        case 'ADD_ORDER':
+            return addOrder(state, action );
         default: 
             return state;
     }
 };
+
+export const addOrder = (state, { orders }) => ({
+    ...state,
+    orders: [
+      ...state.orders,
+      order
+    ]
+});

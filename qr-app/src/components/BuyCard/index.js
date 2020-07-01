@@ -18,7 +18,12 @@ import americanIpa from './american-ipa.png';
 import munich from './munich.png';
 import witbier from './witbier.png';
 import czech from './czech.png';
-import barrel from './barrel.png';
+import * as barrel from './barrel.png';
+
+// TODO por seletor de litragem
+// TODO a qtd faz um loop de add_order pro redux
+// TODO fazer um select de order do redux e adiocionar pra related da forma de pedidos.json
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,18 +66,68 @@ export default function BuyCard(props) {
     const [state, setState] = React.useState(
         {
             tipo: '',
-            value: 0,
-            qtd:0,
+            volume: 0,
+            qtd: 0,
             rem:'',
+            src:null,
         }
     );
-  
+
+    function imgSel (tipo) {
+      switch(tipo) {
+        case 'apa-1':{ 
+          return apa
+        }
+        case 'american-ipa': {
+          return americanIpa
+        }
+        case 'czech': {
+          return czech
+        }
+        case 'munich': {
+          return munich
+        }
+        case 'witbier': {
+          return witbier
+        }
+        default :{
+          return barrel
+        }
+      }
+    }
+
+    function getPrice (barrel) {
+      switch(barrel) {
+        case 'apa-1':{ 
+          return 50
+        }
+        case 'american-ipa': {
+          return 60
+        }
+        case 'czech': {
+          return 70
+        }
+        case 'munich': {
+          return 80
+        }
+        case 'witbier': {
+          return 90
+        }
+        default :{
+          return 800
+        }
+      }
+    }
+
     const handleChange = (event) => {
       const name = event.target.name;
     //   const src = event.target.imgSrc;
+      const name2 = event.target.name2;
+      // console.log("selected img:", imgSlct[state[name]]);
       setState({
         ...state,
         [name]: event.target.value,
+        [name2]: event.target.value
         // [src]: event.target.value
         // [cost]: event.target
       });
@@ -96,7 +151,7 @@ export default function BuyCard(props) {
             <Grid item>
             <ButtonBase className={classes.image}>      
                 {/* TODO: pqp mano vai se fuder link bugado do caralho pra imagem */}
-                <img className={classes.img} alt="complex" src={barrel} />
+                <img className={classes.img} alt="complex" src={imgSel(state.tipo)} />
             </ButtonBase>
             </Grid>
             <Grid item xs={12} sm container>
@@ -111,16 +166,15 @@ export default function BuyCard(props) {
                     label="Tipo"
                     inputProps={{
                         name: 'tipo',
-                        imgSrc: 'image', 
                         id: 'outlined-tipo-native-simple',
                     }}
                     >
                     <option aria-label="None" value="" />
-                    <option value={500}>apa-1</option>
-                    <option value={600}>american-ipa</option>
-                    <option value={700}>czech</option>
-                    <option value={800}>munich</option>
-                    <option value={900}>witbier</option>
+                    <option value={"apa-1"}>apa-1</option>
+                    <option value={"american-ipa"}>american-ipa</option>
+                    <option value={"czech"}>czech</option>
+                    <option value={"munich"}>munich</option>
+                    <option value={"witbier"}>witbier</option>
                     </Select>
                 </FormControl>
                 {/*  */}
@@ -153,12 +207,12 @@ export default function BuyCard(props) {
                 </Grid>
                 <Grid item xl>
                 <FormControl variant="outlined" className={classes.formControl}>
-                    <InputLabel htmlFor="outlined-rem-native-simple">Remetente</InputLabel>
+                    <InputLabel htmlFor="outlined-rem-native-simple">Cliente</InputLabel>
                     <Select
                     native
                     value={state.rem}
                     onChange={handleChange}
-                    label="Remetente"
+                    label="Cliente"
                     inputProps={{
                         name: 'rem',
                         id: 'outlined-tipo-native-simple',
@@ -173,10 +227,32 @@ export default function BuyCard(props) {
                     <option value={'Agluglu'}>Casa de Gio</option>
                     </Select>
                 </FormControl>
+                <FormControl variant="outlined" className={classes.formControl}>
+                    <InputLabel htmlFor="outlined-rem-native-simple">Volume</InputLabel>
+                    <Select
+                    native
+                    value={state.volume}
+                    onChange={handleChange}
+                    label="Volume"
+                    inputProps={{
+                        name: 'volume',
+                        id: 'outlined-tipo-native-simple',
+                    }}
+                    >
+                    <option aria-label="None" value="" />
+                    <option value={10}>10 L</option>
+                    <option value={20}>20 L</option>
+                    <option value={30}>30 L</option>
+                    <option value={35}>35 L</option>
+                    <option value={40}>40 L</option>
+                    <option value={45}>45 L</option>
+                    <option value={50}>50 L</option>                    
+                    </Select>
+                </FormControl>
                 </Grid>
             </Grid>
             <Grid item>
-                <Typography variant="subtitle1">${state.tipo * state.qtd }</Typography>
+                <Typography variant="subtitle1">R$ {(state.tipo && state.qtd && state.volume) ? parseInt(getPrice(state.tipo)) * parseInt(state.qtd) *  parseInt(state.volume) + ".00": "Preencha os campos por favor" }</Typography>
             </Grid>
             </Grid>
         </Grid>
