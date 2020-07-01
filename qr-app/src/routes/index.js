@@ -10,7 +10,7 @@ import AuthPage from '../pages/Auth';
 import Market from '../pages/Market';
 
 import {Grid} from '@material-ui/core';
-import {Home, CropFree, Toc} from '@material-ui/icons';
+import {Home, CropFree, Toc, ShoppingCart } from '@material-ui/icons';
 
 const DEFAULT_ROUTES = [
   {
@@ -44,7 +44,7 @@ const DEFAULT_ROUTES = [
   {
     path: '/market',
     exact: true,
-    icon: Toc,
+    icon: ShoppingCart,
     name:'Market',
     component: Market
   },

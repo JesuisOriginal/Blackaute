@@ -11,15 +11,20 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import { Button } from '@material-ui/core';
-import AddLocationIcon from '@material-ui/icons/AddLocation';
 
-import apa from './apa-1.png';
-import americanIpa from './american-ipa.png';
-import munich from './munich.png';
-import witbier from './witbier.png';
-import czech from './czech.png';
-import * as barrel from './barrel.png';
 
+import apa from './imgs/apa-1.png';
+import americanIpa from './imgs/american-ipa.png';
+import munich from './imgs/munich.png';
+import witbier from './imgs/witbier.png';
+import czech from './imgs/czech.png';
+import * as barrel from './imgs/barrel.png';
+
+import { connect } from 'react-redux';
+import { addToOrder } from '../../store/actions/barrelActions';
+
+import * as BarrelJSON from '../../DataFormats/barrel.json';
+// import
 // TODO por seletor de litragem
 // TODO a qtd faz um loop de add_order pro redux
 // TODO fazer um select de order do redux e adiocionar pra related da forma de pedidos.json
@@ -60,8 +65,14 @@ const useStyles = makeStyles((theme) => ({
 
 const images = [apa, czech, americanIpa, munich, witbier];
 // TODO: Mudar Imagem pra cada selecao de items
+// "babel-plugin-transform-decorators": "6.24.1",
+
+
+
+
 
 export default function BuyCard(props) {
+
     const classes = useStyles();
     const [state, setState] = React.useState(
         {
@@ -69,7 +80,7 @@ export default function BuyCard(props) {
             volume: 0,
             qtd: 0,
             rem:'',
-            src:null,
+            orders: [],
         }
     );
 
@@ -129,6 +140,23 @@ export default function BuyCard(props) {
       });
       if (state.tipo && state.qtd && state.rem && state.volume) {
         // TODO something
+        var newBarrel = Object.assign({}, BarrelJSON);
+        newBarrel.content.name = state.tipo;
+        newBarrel.content.value = getPrice(state.tipo);
+        newBarrel.description.cliente = state.rem;
+        newBarrel.content.pricing = state.qtd * state.volume * getPrice(state.tipo);
+        newBarrel.description.volume = state.volume;
+        console.log(newBarrel);
+        setState({
+          ...state,
+          orders:[
+            ...state.orders,
+            newBarrel
+          ]
+        });
+        console.log();
+        // dis
+
       }
     };
 
@@ -251,7 +279,7 @@ export default function BuyCard(props) {
                 </Grid>
             </Grid>
             <Grid item>
-                <Typography variant="subtitle1">R$ {(state.tipo && state.qtd && state.volume) ? parseInt(getPrice(state.tipo)) * parseInt(state.qtd) *  parseInt(state.volume) + ".00": "Preencha os campos por favor" }</Typography>
+                <Typography variant="subtitle1">R$ {(state.tipo && state.qtd && state.volume) ? getPrice(state.tipo) * state.qtd *  state.volume + ".00": "Preencha os campos por favor" }</Typography>
             </Grid>
             </Grid>
         </Grid>
@@ -259,3 +287,7 @@ export default function BuyCard(props) {
     </div>
     );
 }
+
+const mapStateToProps = state =>  ({
+  orders: state
+})

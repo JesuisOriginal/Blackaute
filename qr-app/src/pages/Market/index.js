@@ -8,7 +8,7 @@ import AddIcon from '@material-ui/icons/Add';
 // import classes from "*.module.css";
 import {Provider} from 'react-redux';
 
-import marketStore from '../../marketStore';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -71,13 +71,11 @@ export default function Market() {
 
 
   return (
-    // <Provider store={marketStore}>     
       <div>
           {/* <FabAddCartItem onClick={console.log("Clicado")}/> */}
           <Fab style={fabStyle} variant={'round'} size={'medium'} color="secondary" onClick={appendChild} aria-label="add">
               <AddIcon />
           </Fab>
-          {/* <Products  /> */}
           <Button style={buttonStyle} variant="contained" color="secondary"  >
               Comprar
           </Button>
@@ -85,8 +83,7 @@ export default function Market() {
             {state.children[0].state.tipo}
           </Typography> */}
           {state.children.map(Child=> <Child />)}
-      </div>
-    // </Provider>    
+      </div>   
     );
 }
 
