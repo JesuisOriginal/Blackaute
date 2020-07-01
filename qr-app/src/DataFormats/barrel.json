@@ -3,9 +3,9 @@
 
         "name": "München Helles",
         
-        "pricing": "",
+        "pricing": 0,
         
-        "value": "200,00",
+        "value": 0,
         
         "unit": "BRL"
         
@@ -13,7 +13,7 @@
         
     "description": {
         
-        "volume": "30l",
+        "volume": "",
 
         "cliente": "",
         

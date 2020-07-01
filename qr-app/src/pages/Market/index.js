@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {connect} from 'react-redux';
+import {connect, useDispatch, useStore} from 'react-redux';
 import Products from "../../components/Products";
 import FabAddCartItem from "../../components/FabAddCartItem";
 import { makeStyles, Grid, Button, Typography } from "@material-ui/core";
@@ -65,10 +65,14 @@ export default function Market() {
     })
   )
 
+  const dispatch = useDispatch();
+  const store = useStore();
+
   const test = () => {
       console.log("Clicado");
   }
 
+  
 
   return (
       <div>

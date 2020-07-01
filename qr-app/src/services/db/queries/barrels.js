@@ -21,6 +21,7 @@ export async function index(handleAdd) {
   const result = [];
   await products.onSnapshot((data) =>
     data.docs.map((_doc) => {
+      console.log("_doc",_doc.data());
       handleAdd(_doc.data());
     })
   );

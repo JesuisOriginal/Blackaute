@@ -11,8 +11,9 @@ const INITIAL_STATE = {
 
 export default function reducer(state = INITIAL_STATE, action) {
     switch(action.type) {
-        case 'ADD_ORDER':
+        case 'market/ADD_ORDER': {
             return addBarrel(state, action );
+        }
         case 'GET_ORDER':
             return state.orders;
         default: 
@@ -22,10 +23,7 @@ export default function reducer(state = INITIAL_STATE, action) {
 
 export const addBarrel = (state, { orders }) => ({
     ...state,
-    orders: [
-      ...state.orders,
-      orders
-    ]
+    orders:[...state.orders, orders]
 });
 
 // export const getOrders = (state, { orders })

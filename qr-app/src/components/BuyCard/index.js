@@ -20,8 +20,9 @@ import witbier from './imgs/witbier.png';
 import czech from './imgs/czech.png';
 import * as barrel from './imgs/barrel.png';
 
-import { connect } from 'react-redux';
+import { connect, useDispatch, useSelector, useStore } from 'react-redux';
 import { addToOrder } from '../../store/actions/barrelActions';
+import { addBarrel } from '../../store/reducers/main';
 
 import * as BarrelJSON from '../../DataFormats/barrel.json';
 // import
@@ -80,9 +81,19 @@ export default function BuyCard(props) {
             volume: 0,
             qtd: 0,
             rem:'',
-            orders: [],
+            update: false,
         }
     );
+
+    const dispatch = useDispatch();
+    const store = useStore();
+
+    const selected = useSelector( 
+        ({theOrder}) => ({
+        orders: theOrder.barrels
+      })
+      );
+
 
     function imgSel (tipo) {
       switch(tipo) {
@@ -130,31 +141,58 @@ export default function BuyCard(props) {
       }
     }
 
-    const handleChange = (event) => {
+    function newBarrel() {
+        BarrelJSON.content.name = state.tipo;
+        BarrelJSON.content.value = getPrice(state.tipo);
+        BarrelJSON.description.cliente = state.rem;
+        BarrelJSON.content.pricing = state.volume * getPrice(state.tipo);
+        BarrelJSON.description.volume = state.volume;
+        console.log("new barrel", BarrelJSON);
+        // var newBarrel = BarrelJSON;
+        // return newBarrel;
+    }
+
+    async function handleChange(event) {
       const name = event.target.name;
       const name2 = event.target.name2;
       setState({
         ...state,
         [name]: event.target.value,
-        [name2]: event.target.value
+        // [name2]: event.target.value
       });
       if (state.tipo && state.qtd && state.rem && state.volume) {
         // TODO something
-        var newBarrel = Object.assign({}, BarrelJSON);
-        newBarrel.content.name = state.tipo;
-        newBarrel.content.value = getPrice(state.tipo);
-        newBarrel.description.cliente = state.rem;
-        newBarrel.content.pricing = state.qtd * state.volume * getPrice(state.tipo);
-        newBarrel.description.volume = state.volume;
-        console.log(newBarrel);
-        setState({
-          ...state,
-          orders:[
-            ...state.orders,
-            newBarrel
-          ]
-        });
-        console.log();
+        // var newBarrel = Object.assign({}, BarrelJSON);
+        console.log("Condicoes satisefitsas");
+
+        await newBarrel();
+
+        if (state.update === false) {
+
+            if (state.qtd > 1) {
+                for (var i = 0; i < state.qtd; i++) {
+                    await dispatch({type: "market/ADD_ORDER", orders: {payload: BarrelJSON}});
+                    console.log("state from loop", store.getState());
+                }
+            } else {
+                await dispatch({type: "market/ADD_ORDER", orders: {payload: BarrelJSON}});
+                console.log("state from else", store.getState());
+            }
+
+          // dispatch add
+            
+            // dispatch(addBarrel())
+
+            setState({
+                ...state,
+                update: true,
+                });
+
+            // console.log(selected);
+        } else {
+          // TODO: dispatch updatebarrel
+        }
+        
         // dis
 
       }
@@ -193,6 +231,7 @@ export default function BuyCard(props) {
                     label="Tipo"
                     inputProps={{
                         name: 'tipo',
+                        name2: 'update',
                         id: 'outlined-tipo-native-simple',
                     }}
                     >
@@ -204,7 +243,6 @@ export default function BuyCard(props) {
                     <option value={"witbier"}>witbier</option>
                     </Select>
                 </FormControl>
-                {/*  */}
                 <FormControl variant="outlined" className={classes.formControl}>
                     <InputLabel htmlFor="outlined-qtd-native-simple">Quantidade</InputLabel>
                     <Select
@@ -214,6 +252,7 @@ export default function BuyCard(props) {
                     label="Quantidade"
                     inputProps={{
                         name: 'qtd',
+                        name2: 'update',
                         id: 'outlined-tipo-native-simple',
                     }}
                     >
@@ -242,6 +281,7 @@ export default function BuyCard(props) {
                     label="Cliente"
                     inputProps={{
                         name: 'rem',
+                        name2: 'update',
                         id: 'outlined-tipo-native-simple',
                     }}
                     >
@@ -263,6 +303,7 @@ export default function BuyCard(props) {
                     label="Volume"
                     inputProps={{
                         name: 'volume',
+                        name2: 'update',
                         id: 'outlined-tipo-native-simple',
                     }}
                     >
@@ -288,6 +329,65 @@ export default function BuyCard(props) {
     );
 }
 
-const mapStateToProps = state =>  ({
-  orders: state
-})
+// DATA ACESSINC EXAMPLE
+
+var temp = 
+{
+    orders: [
+        {
+            payload: {
+                    'default': {
+                        content: {
+                            name: 'munich',
+                            pricing: 8000,
+                            value: 80,
+                            unit: 'BRL'
+                        },
+                        description: {
+                            volume: '10',
+                            cliente: 'ceu',
+                            coord: {
+                            lat: -8.062664,
+                            lng: -34.872825
+                            }
+                        },
+                        meta: {
+                            schema: 'produto',
+                            updated_at: '{\'DD-MM-YYYY\'}',
+                            created_at: '{\'DD-MM-YYYY\'}',
+                            id: 341592
+                        }
+                    }
+            }
+        },
+
+        {
+            payload: {
+                'default': {
+                    content: {
+                        name: 'munich',
+                        pricing: 8000,
+                        value: 80,
+                        unit: 'BRL'
+                    },
+                    description: {
+                        volume: '10',
+                        cliente: 'ceu',
+                        coord: {
+                        lat: -8.062664,
+                        lng: -34.872825
+                        }
+                    },
+                    meta: {
+                        schema: 'produto',
+                        updated_at: '{\'DD-MM-YYYY\'}',
+                        created_at: '{\'DD-MM-YYYY\'}',
+                        id: 341592
+                    }
+                }
+            }
+        }
+  ]
+}
+
+console.log("temp", temp.orders[0].payload.default);
