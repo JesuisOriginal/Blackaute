@@ -4,6 +4,7 @@ import NavLink from "../NavLink";
 import { Grid, Button, Typography} from "@material-ui/core";
 import Icon from '@material-ui/core/Icon'
 import MainTheme from '../../themes/constants';
+import Logo from '../../assets/logos/logo.png'
 
 export default function SimpleBottomNavigation(props) {
   const [value, setValue] = React.useState(0);
@@ -22,7 +23,7 @@ export default function SimpleBottomNavigation(props) {
       // height: props.screenType ? '5rem' : '100%',
       // zIndex: 10,
       // paddingTop: props.screenType ? '' : '2rem',
-      backgroundColor:MainTheme.colors.paleBrown,
+      backgroundColor:'#fff'
     },
     item: {
       textAlign: 'center',
@@ -32,7 +33,7 @@ export default function SimpleBottomNavigation(props) {
       textAlign: 'center'
     },
     button: {
-      color: MainTheme.colors.greatYellow,
+      color: MainTheme.colors.paleBrown,
       alignItems:'center',
       justifyContent:'center',
       width: props.screenType ? '100px' : '2rem',
@@ -70,6 +71,7 @@ export default function SimpleBottomNavigation(props) {
     //  justify={props.screenType ? 'center' : 'flex-start' }
     //   alignItems={'center'}
       >
+      <Grid style={{backgroundImage:`url(${Logo})`, backgroundPosition:'center', backgroundSize:'cover',width:'auto', height:'25%',display:'flex'}}/>
       <MenuItems />
     </Grid>
   );

@@ -1,4 +1,4 @@
-import {styled, Box, Grid, Typography, Divider} from '@material-ui/core';
+import {styled, Box, Grid, Typography, Divider, Link} from '@material-ui/core';
 import Logo from '../../assets/logos/logo.png';
 
 export const Container = styled(Box)({
@@ -34,7 +34,10 @@ export const MainContainer = styled(Grid)({
 export const SidebarHeader = styled(Grid)({
     display:'flex',
     flex: 1,
-    paddingTop:'10rem'
+    paddingTop:'10rem',
+    flexDirection:'column',
+    alignItems:'center',
+    justifyContent:'center',
 });
 
 export const HeaderTitle = styled(Typography)({
@@ -42,6 +45,13 @@ export const HeaderTitle = styled(Typography)({
     fontWeight:'bold',
     fontSize:'3rem',
     flex: 1,
+});
+
+export const SignUpLink = styled(Link)({
+    fontWeight:'bold',
+    fontSize:'2rem',
+    color: '#c8c8c8',
+    fontFamily:'Roboto'
 });
 
 export const SidebarDivider = styled(Divider)({

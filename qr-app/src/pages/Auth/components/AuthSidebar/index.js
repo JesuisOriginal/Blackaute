@@ -12,7 +12,7 @@ export default class AuthSidebar extends React.PureComponent {
     <ItemContainer item xs={12}>
       <Grid container alignItems="center" direction="row" justify="flex-start">
         <Grid item xs={2}>
-          <Fab size="big" onClick={this.handleReturn}>
+          <Fab size="large" onClick={this.handleReturn}>
             <ArrowBack />
           </Fab>
         </Grid>
