@@ -16,10 +16,8 @@ export default class View extends React.PureComponent {
 };
 
 const styles = {
+  display:'flex',
+  flex:1,
   height: '100%',
-  width: '100%',
-  backgroundColor: '#E5E5E5',
-  // backgroundColor: MainTheme.colors.background,
-  position: 'absolute',
-  overflow: 'auto',
+  overflowX:'hidden',
 };
