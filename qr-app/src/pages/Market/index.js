@@ -100,7 +100,7 @@ export default function Market() {
     const dispatch = useDispatch();
     const store = useStore();
     const history = useHistory();
-
+    dispatch({type: Types.clearBarrel});
     function newPedido(state) {
         var newpedido = createSkeleton({
             content: {
