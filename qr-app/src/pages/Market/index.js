@@ -12,6 +12,7 @@ import * as Pedido from '../../DataFormats/pedidos.json';
 import {Types} from '../../store/reducers/main';
 import { products } from '../../services/db/storage/';
 import { firebase } from '../../services/db/config';
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -70,14 +71,22 @@ export default function Market() {
 
     const dispatch = useDispatch();
     const store = useStore();
-    
+    const history = useHistory();
+
     const createOrder = () => {
-        var orderState = store.getState();
+        var orderState = store.getState().theOrder;
+        console.log("got state.theOrder", orderState);
+
         orderState.orders.forEach(order => {
-            Pedido.related.concat(order.payload.default);
+            console.log("Pedido ", order);
+            Pedido.related.push(order.default);
+            if (Pedido.meta.id === "") {
+                console.log("set: destinatario", order.default.description.cliente);
+                Pedido.meta.id = order.default.description.cliente + Math.floor(Math.random() * 10000);
+            }
         });
 
-        Pedido.meta.id = Pedido.related[0].description.cliente + Math.floor(Math.random() * 10000);
+        // Pedido.meta.id = Pedido.related[0].description.cliente + Math.floor(Math.random() * 10000);
     }
 
     const test = () => {
@@ -85,14 +94,17 @@ export default function Market() {
     }
 
     async function handleCompra()  {
-        await createOrder("Boobs");
-
-        dispatch({type: Types.addRequest, payload: {order: Pedido}});
+        await createOrder("Boobs a milanesa");
+        var payload = {};
+        payload = Pedido.default;
+        dispatch({type: Types.addBarrel, payload: payload});
         // TODO: dar dispatch num {type: "market/CLEAR_ORDER"}
         var newDoc = products.doc(Pedido.meta.id);
+
+        console.log("Sending...", payload);
         await newDoc
         .set({
-            Pedido,
+            payload,
         })
         .then(function () {
             console.log("Barrel Added, check Firebase Console...");
@@ -100,7 +112,7 @@ export default function Market() {
         .catch(function (error) {
             console.log("Error, whos hunting you: ", error);
         });
-
+        history.push('/products');
     }
 
 
