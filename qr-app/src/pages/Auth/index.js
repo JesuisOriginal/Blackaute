@@ -3,10 +3,11 @@ import {connect} from 'react-redux';
 import auth from '../../services/db/auth';
 import {Types} from './redux/reducer';
 
-import {Grid, Box} from '@material-ui/core';
-import {Container, SidebarContainer, MainContainer} from './styles';
+import {Grid, Box, Divider} from '@material-ui/core';
+import {Container, SidebarContainer, MainContainer, SidebarHeader, HeaderTitle, SidebarDivider, LogoContainer, ImageItem} from './styles';
 import AuthSidebar from './components/AuthSidebar';
 import LoginInput from './components/LoginInput';
+
 
 const INTIAL_STATE = {
   credentials: {},
@@ -59,11 +60,17 @@ class AuthPage extends React.Component {
         return(
           <Container>
             <SidebarContainer>
-              <AuthSidebar onReturn={() => null}>
+              <SidebarHeader>
+                <HeaderTitle>Realize o seu login</HeaderTitle>
+              </SidebarHeader>
+              <AuthSidebar>
                 <LoginInput onChange={this.handleChange} onSubmit={this.handleSubmit} />
               </AuthSidebar>
             </SidebarContainer>
             <MainContainer>
+              <LogoContainer>
+                <ImageItem />
+              </LogoContainer>
             </MainContainer>
           </Container>
         )

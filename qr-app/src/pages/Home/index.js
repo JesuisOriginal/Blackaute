@@ -25,7 +25,7 @@ class Home extends React.Component {
       </View>
     );
   }
-}
+};
 
 export default Home;
 

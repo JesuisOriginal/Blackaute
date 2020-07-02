@@ -43,8 +43,8 @@ export default class AuthSidebar extends React.PureComponent {
 }
 
 const Container = styled(Grid)({
-  boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
   display:'flex',
+  flex:3,
   flexDirection:'column',
   padding: '2rem',
   alignItems:'center',

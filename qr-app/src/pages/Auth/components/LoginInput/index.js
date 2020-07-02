@@ -21,14 +21,12 @@ export default function LoginInput({onChange, onSubmit}) {
 };
 
 const Container = styled(Grid)({
-    width:'100%',
+    display:'flex',
+    flex:1,
 });
 
 const InputText = styled(Input)({
     display:'flex',
     flex:1,
     height: '45px',
-    // alignItems:'center',
-    // justifyContent:'flex-start',
-    // border:'1px solid black',
 })

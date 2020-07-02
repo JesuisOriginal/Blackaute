@@ -12,12 +12,16 @@ export default function SimpleBottomNavigation(props) {
 
   const styles = {
     container: {
-      position: 'fixed',
-      bottom: 0,
-      width: props.screenType ? '100%' : '10rem',
-      height: props.screenType ? '5rem' : '100%',
-      zIndex: 10,
-      paddingTop: props.screenType ? '' : '2rem',
+      display:'flex',
+      flex:1,
+      flexDirection:'column' ,
+      // height: '100%',
+      // position: 'fixed',
+      // bottom: 0,
+      // width: props.screenType ? '100%' : '10rem',
+      // height: props.screenType ? '5rem' : '100%',
+      // zIndex: 10,
+      // paddingTop: props.screenType ? '' : '2rem',
       backgroundColor:MainTheme.colors.paleBrown,
     },
     item: {
@@ -59,7 +63,13 @@ export default function SimpleBottomNavigation(props) {
   };
 
   return (
-    <Grid container direction={props.screenType ? 'row' : 'column'} style={styles.container} justify={props.screenType ? 'center' : 'flex-start' } alignItems={'center'}>
+    <Grid 
+    // container 
+    // direction={props.screenType ? 'row' : 'column'}
+     style={styles.container} 
+    //  justify={props.screenType ? 'center' : 'flex-start' }
+    //   alignItems={'center'}
+      >
       <MenuItems />
     </Grid>
   );

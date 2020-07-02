@@ -13,6 +13,8 @@ import {Grid} from '@material-ui/core';
 import {Home, CropFree, Toc, ShoppingCart } from '@material-ui/icons';
 import { connect } from "react-redux";
 
+import {Container, MainContainer, SidebarContainer} from './styles';
+
 const DEFAULT_ROUTES = [
   {
     path: '/auth',
@@ -88,16 +90,27 @@ class RootRoute extends React.Component {
     const {routes, screenType} = this.state;
     const {logged_in} = this.props;
     // console.log('route', this.props)
+    const mock = false;
     return (
       <Router>
-        <Switch>
-          {routes.map((route, index) => (
-            <Route key={`route_${index}`} path={route.path} exact={route.exact} component={route.component} />
-          ))}
-        </Switch>
-        {logged_in && (
-          <BottomNav {...this.state} screenType={screenType}/>
-        )}
+        <Container screenType={screenType}>
+          {(mock || logged_in) && (
+            <SidebarContainer screenType={screenType}>
+                <BottomNav {...this.state} screenType={screenType}/>
+            </SidebarContainer>
+            )}
+            <Switch >
+              <MainContainer>
+              {(mock || logged_in) ?  (
+                routes.map((route, index) => (
+                    <Route key={`route_${index}`} path={route.path} exact={route.exact} component={route.component} />
+                  ))
+                  ):( 
+                    <Route key={`route_${0}`} path={'/'} exact={routes[0].exact} component={routes[0].component} />
+                    )}
+              </MainContainer>
+            </Switch>
+        </Container>
       </Router>
     );
   }
