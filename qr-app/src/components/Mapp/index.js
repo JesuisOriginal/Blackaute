@@ -1,7 +1,7 @@
 import React from 'react'
 import ProtoMapp from './ProtoMapp';
 
-export default function Mapp() {
+export default function Mapp(props) {
     return (
       <div style={style}>
         <ProtoMapp 
@@ -16,6 +16,7 @@ export default function Mapp() {
 
 
 const style = {
-    height: '100vh', 
-    width: '100vw'
+    height: '500px', 
+    width: '500px',
+    margin: '10px'
 }

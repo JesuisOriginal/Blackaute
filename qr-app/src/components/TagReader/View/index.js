@@ -18,8 +18,7 @@ export default class View extends React.PureComponent {
 const styles = {
   height: '100%',
   width: '100%',
-  backgroundColor: '#E5E5E5',
-  // backgroundColor: MainTheme.colors.background,
+  backgroundColor: MainTheme.colors.background,
   position: 'absolute',
   overflow: 'auto',
 };

@@ -41,6 +41,10 @@ class ProductsPage extends React.Component {
     return (
        
         <View>
+          <style>
+              @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+          </style>
+          <h1 style = {headerStyle}>Detalhes de Baris ativos</h1>
           <FabUpdate onClick={this.handleGetProducts} loading={this.state.loading} />
           <Barrels itens={barrels} />
         </View>
@@ -49,17 +53,24 @@ class ProductsPage extends React.Component {
   }
 }
 
+const headerStyle = {
+  fontFamily: "Lato",
+  fontStyle: "normal",
+  fontWeight : "bold",
+  fontSize: "50px",
+  lineHeight: "60px",
+  color: "#1B1C1D",
+  position: "relative",
+  left: "15%",
+}
+
 const divStyle = {
   overflow : 'auto',
-};
+}
 
 const mapStateToProps = ({MainReducer}) => ({
   barrels: MainReducer.barrels
-});
-
-// const mapDispatchToProps = dispatch => ({
-//   addBerrls: () => 
-// })
+})
 
 
 export default connect(mapStateToProps)(ProductsPage);

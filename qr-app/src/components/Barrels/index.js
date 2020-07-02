@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import BarrelCard from '../BarrelCard';
+import BarrelCard from './barrelCard';
 
 
 class Barrels extends Component {
     render() {
+        console.log("não estou ficando louco")
         if(typeof this.props.itens !== "undefined"){
             return this.props.itens.map((item) => (
-                <BarrelCard key={Math.random()} tipo={item.tipo} rem={item.remetente} id={item.hash}/>
+                <BarrelCard key={Math.random()} barril={item}/>
             ));
         }else{
             return(
