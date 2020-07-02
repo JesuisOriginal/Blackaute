@@ -128,7 +128,9 @@ export default function Market() {
             {/* <Typography>
             {state.children[0].state.tipo}
             </Typography> */}
-            {state.children.map(Child=> <Child />)}
+            {/* {state.children.map((Child, index) => <Child key={`product_child_${index}`} />)}
+             */}
+            {state.children.map((Child, index) => <Child key={`product_child_${index}`} />)}
         </div>   
     );
 }

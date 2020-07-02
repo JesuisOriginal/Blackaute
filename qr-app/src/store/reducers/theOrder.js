@@ -14,7 +14,7 @@ export default function reducer(state = INITIAL_STATE, action) {
             console.log("state", state);
             console.log("action", action);
             console.log("payload", action.payload);
-            
+
             return addBarrel(state, action.payload );
         }
         case 'GET_ORDER':
@@ -26,7 +26,8 @@ export default function reducer(state = INITIAL_STATE, action) {
 
 export const addBarrel = (state, { order }) => ({
     // ...state,
-    orders:[...state.orders, order]
+    // orders:[...state.orders, order]
+    orders: [...state.orders].concat(order)
 });
 
 // export const getOrders = (state, { orders })
