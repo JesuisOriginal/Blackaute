@@ -23,12 +23,75 @@ import * as barrel from './imgs/barrel.png';
 import { connect, useDispatch, useSelector, useStore } from 'react-redux';
 import { addToOrder } from '../../store/actions/barrelActions';
 import { addBarrel } from '../../store/reducers/main';
+import {Types} from '../../store/reducers/main';
 
 import * as BarrelJSON from '../../DataFormats/barrel.json';
 // import
 // TODO por seletor de litragem
 // TODO a qtd faz um loop de add_order pro redux
 // TODO fazer um select de order do redux e adiocionar pra related da forma de pedidos.json
+
+const createSkeleton = (data) => ({
+  content: {
+      name: "",
+      pricing: 0,
+      value: 0,
+      unit: "BRL"
+  },
+  description: {
+      volume: "",
+      cliente: "",
+      coord: {
+              "lat": -8.062664,
+              "lng": -34.872825
+          }
+  },
+  meta: {
+      schema: "produto",
+      updated_at: new Date().getDate(),
+      created_at: new Date().getDate(),
+      id: 341592,
+  },
+  ...data
+})
+
+const BARRIL_SKELETON = {
+      content: {
+
+        name: "",
+        
+        pricing: 0,
+        
+        value: 0,
+        
+        unit: "BRL"
+        
+    },
+        
+    description: {
+        
+        volume: "",
+
+        cliente: "",
+        
+        coord: {
+                "lat": -8.062664,
+                "lng": -34.872825
+            }
+        
+    },
+    meta: {
+        
+        schema: "produto",
+        
+        updated_at: new Date().getDate(),
+        
+        created_at: new Date().getDate(),
+        
+        id: 341592
+        
+    }
+}
 
 
 const useStyles = makeStyles((theme) => ({
@@ -88,12 +151,6 @@ export default function BuyCard(props) {
     const dispatch = useDispatch();
     const store = useStore();
 
-    const selected = useSelector( 
-        ({theOrder}) => ({
-        orders: theOrder.barrels
-      })
-      );
-
 
     function imgSel (tipo) {
       switch(tipo) {
@@ -140,16 +197,29 @@ export default function BuyCard(props) {
         }
       }
     }
-
+    
     function newBarrel() {
-        BarrelJSON.content.name = state.tipo;
-        BarrelJSON.content.value = getPrice(state.tipo);
-        BarrelJSON.description.cliente = state.rem;
-        BarrelJSON.content.pricing = state.volume * getPrice(state.tipo);
-        BarrelJSON.description.volume = state.volume;
-        console.log("new barrel", BarrelJSON);
-        // var newBarrel = BarrelJSON;
-        // return newBarrel;
+
+      const {tipo,rem,volume} = state;
+
+        const pricing = volume * getPrice(tipo);
+        const value = getPrice(tipo);
+
+        var newBarril = createSkeleton({
+          content: {
+            name: tipo,
+            value,
+            pricing,
+
+          },
+          description:{
+            cliente: rem,
+            volume,
+          }
+        });
+        
+        console.log("newBarrel",newBarril);
+        return newBarril;
     }
 
     async function handleChange(event) {
@@ -165,17 +235,28 @@ export default function BuyCard(props) {
         // var newBarrel = Object.assign({}, BarrelJSON);
         console.log("Condicoes satisefitsas");
 
-        await newBarrel();
+        //await newBarrel();
+        var barrelToDispatch = newBarrel();
+        console.log("barrelToDispa", barrelToDispatch);
+        console.log('typeof ', typeof(barrelToDispatch));
+        // console.log("barrelToDispatch()", (barrelToDispatch())() );
+        // console.log("typeof(barrelToDispatch())", typeof(barrelToDispatch()));
+
+        //Jorge Foreman
 
         if (state.update === false) {
-
             if (state.qtd > 1) {
                 for (var i = 0; i < state.qtd; i++) {
-                    dispatch({type: "market/ADD_ORDER", payload: BarrelJSON });
+                    // dispatch({type: "market/ADD_ORDER", payload: {order: BarrelJSON}});
+                    dispatch({type: Types.addBarrel, barrel: barrelToDispatch});
                     console.log("state from loop", store.getState());
                 }
             } else {
-                dispatch({type: "market/ADD_ORDER", payload: {order: BarrelJSON} });
+                // dispatch({type: "market/ADD_ORDER", payload: {order: BarrelJSON} });
+                // dispatch({type: Types.addBarrel, barrel: BarrelJSON });
+                // dispatch({type: "market/ADD_ORDER", order: BarrelJSON });
+                dispatch({type: Types.addBarrel, barrel: barrelToDispatch});
+
                 console.log("state from else", store.getState());
             }
 
@@ -412,6 +493,101 @@ var temp2 = {
             created_at: '{\'DD-MM-YYYY\'}',
             id: 341592
           }
+        }
+      }
+    }
+  }
+
+var addAction = 
+{
+    type: 'main/ADD_BARREL',
+    barrel: {
+      payload: {
+        related: [
+          {
+            content: {
+              pricing: 3150,
+              value: 70,
+              name: 'czech',
+              unit: 'BRL'
+            },
+            description: {
+              volume: '45',
+              cliente: 'Agluglu',
+              coord: {
+                lat: -8.062664,
+                lng: -34.872825
+              }
+            },
+            meta: {
+              created_at: '{\'DD-MM-YYYY\'}',
+              schema: 'produto',
+              updated_at: '{\'DD-MM-YYYY\'}',
+              id: 341592
+            }
+          },
+          {
+            content: {
+              unit: 'BRL',
+              pricing: 3150,
+              name: 'czech',
+              value: 70
+            },
+            description: {
+              volume: '45',
+              cliente: 'Agluglu',
+              coord: {
+                lng: -34.872825,
+                lat: -8.062664
+              }
+            },
+            meta: {
+              updated_at: '{\'DD-MM-YYYY\'}',
+              created_at: '{\'DD-MM-YYYY\'}',
+              schema: 'produto',
+              id: 341592
+            }
+          }
+        ],
+        meta: {
+          created_at: ' {\'DD-MM-YYYY\'}',
+          id: 'Agluglu7302',
+          updated_at: '{\'DD-MM-YYYY\'}',
+          schema: '<schema>'
+        },
+        content: {
+          location_id: '',
+          status: 'Saindo Pra Entrega',
+          receiver_id: ''
+        }
+      }
+    }
+  }
+
+var mine = 
+{
+    type: 'main/ADD_BARREL',
+    payload: {
+      'default': {
+        content: {
+          name: 'american-ipa',
+          pricing: 1800,
+          value: 60,
+          unit: 'BRL'
+        },
+        description: {
+          volume: '30',
+          cliente: 'Hyper Casa Forte',
+          coord: {
+            lat: -8.062664,
+            lng: -34.872825
+          }
+        },
+        meta: {
+          schema: 'produto',
+          updated_at: '{\'DD-MM-YYYY\'}',
+          created_at: '{\'DD-MM-YYYY\'}',
+          id: 341592
         }
       }
     }

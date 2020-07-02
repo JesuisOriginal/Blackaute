@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import {connect, useDispatch, useStore} from 'react-redux';
 import Products from "../../components/Products";
@@ -29,6 +30,32 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
+const createSkeleton = (data) => ({
+    content: {
+  
+        status: "Saindo Pra Entrega",
+  
+        location_id:"",
+        
+        receiver_id: "" 
+        
+    },
+        
+    meta: {
+        
+        schema: "<schema>",
+            
+        updated_at: "{'DD-MM-YYYY'}",
+            
+        created_at:" {'DD-MM-YYYY'}",
+            
+        id: ""
+        
+    },
+  
+    related:[]
+});
+
 const buttonStyle = {
         padding: "1rem",
         right: '20rem',
@@ -55,6 +82,7 @@ const INITIAL_STATE = {
 };
 
 
+
 export default function Market() {
     const classes = useStyles();
     const [state, setState] = useState(INITIAL_STATE);
@@ -73,20 +101,39 @@ export default function Market() {
     const store = useStore();
     const history = useHistory();
 
+    function newPedido(state) {
+        var newpedido = createSkeleton({
+            content: {
+                status: "Saindo pra entrega"
+            },
+
+            related: []
+        })
+
+        console.log("new Pedido", newpedido);
+        return newpedido;
+    }
+
     const createOrder = () => {
-        var orderState = store.getState().theOrder;
+        var orderState = store.getState().MainReducer.barrels;
         console.log("got state.theOrder", orderState);
 
-        orderState.orders.forEach(order => {
-            console.log("Pedido ", order);
-            Pedido.related.push(order.default);
-            if (Pedido.meta.id === "") {
-                console.log("set: destinatario", order.default.description.cliente);
-                Pedido.meta.id = order.default.description.cliente + Math.floor(Math.random() * 10000);
-            }
+        var pedidoToDispatch = newPedido();
+
+        orderState.forEach((order, index) => {
+            console.log("order ", order);
+            pedidoToDispatch.related.push(order);
+
         });
 
-        // Pedido.meta.id = Pedido.related[0].description.cliente + Math.floor(Math.random() * 10000);
+                    
+        if (pedidoToDispatch.meta.id === "") {
+            console.log("set cliente: ", orderState[0].description.cliente);
+            pedidoToDispatch.meta.id = orderState[0].description.cliente + Math.floor(Math.random() * 10000);
+            console.log("market/pedido.meta.id: ", pedidoToDispatch.meta.id, pedidoToDispatch);
+        }
+
+        return pedidoToDispatch;
     }
 
     const test = () => {
@@ -94,20 +141,20 @@ export default function Market() {
     }
 
     async function handleCompra()  {
-        await createOrder("Boobs a milanesa");
-        var payload = {};
-        payload = Pedido.default;
-        dispatch({type: Types.addBarrel, payload: payload});
-        // TODO: dar dispatch num {type: "market/CLEAR_ORDER"}
-        var newDoc = products.doc(Pedido.meta.id);
+        var pedidoToDispatch =  createOrder("Boobs a milanesa");
+        console.log("Sending...", pedidoToDispatch);
+        dispatch({type: Types.addRequest, data: pedidoToDispatch});
 
-        console.log("Sending...", payload);
+        // TODO: dar dispatch num {type: "market/CLEAR_ORDER"}
+
+        var newDoc = products.doc(pedidoToDispatch.meta.id);
+        
         await newDoc
         .set({
-            payload,
+            pedidoToDispatch,
         })
         .then(function () {
-            console.log("Barrel Added, check Firebase Console...");
+            console.log("Pedido Added, check Firebase Console...");
         })
         .catch(function (error) {
             console.log("Error, whos hunting you: ", error);
@@ -130,7 +177,7 @@ export default function Market() {
             </Typography> */}
             {/* {state.children.map((Child, index) => <Child key={`product_child_${index}`} />)}
              */}
-            {state.children.map((Child, index) => <Child key={`product_child_${index}`} />)}
+            {state.children.map(Child => <Child />)}
         </div>   
     );
 }

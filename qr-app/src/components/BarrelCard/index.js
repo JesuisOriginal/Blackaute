@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useHistory}from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function BarrelCard(props) {
   const classes = useStyles();
+  const history = useHistory();
 
   let gitLoc = () => {
     console.log('essa função deve encaminhar para uma rota que mostre um mapa e a posição autal do barril');
@@ -67,6 +68,7 @@ export default function BarrelCard(props) {
                 startIcon={<AddLocationIcon />}
                 onClick={gitLoc}
               >
+                {/* {history.push("/map")} */}
                 Localização Atual
               </Button>
               </Grid>
