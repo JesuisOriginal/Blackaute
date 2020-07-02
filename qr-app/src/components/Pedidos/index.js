@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import {Button} from "@material-ui/core";
-import * as pedido from "../../mocks/pedidos.json";
+//import * as pedido from "../../mocks/pedidos.json";
 import Mapp from "../Mapp";
 import Steps from "./Steps";
 import {useDispatch, useSelector} from 'react-redux';
@@ -23,7 +23,9 @@ const useStyles = makeStyles(theme => ({
 
 function Pedidos() {
   const classes = useStyles();
-  // const pedido = useSelector(state => state.OrdersReducer.activeOrder);
+  const pedido = useSelector(state => state.OrdersReducer.activeOrder);
+
+  console.log("Teste Payload", pedido);
 
   const dispatchBarril = useDispatch();
   dispatchBarril(setActiveBarril(pedido.related));

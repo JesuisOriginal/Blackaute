@@ -1,7 +1,7 @@
 export const orderTypes = {
     getBarril : 'order/GET_BARRIL',
     addBarril : 'order/ADD_BARRIL',
-    setActiveOrder : 'oder/SET_ACTIVE_ORDER', 
+    setActiveOrder : 'order/SET_ACTIVE_ORDER', 
     setActiveBarril: 'order/SET_ACTIVE_BARRIL',
     clearState: 'order/CLEAR_STATE',
     setToggleBarril: 'order/SET_TOGGLE_BARRIL'

@@ -6,7 +6,7 @@ class Barrels extends Component {
     render() {
         if(typeof this.props.itens !== "undefined"){
             return this.props.itens.map((item) => (
-                <BarrelCard key={Math.random()} barril={item}/>
+                <BarrelCard key={Math.random()} pedido={item}/>
             ));
         }else{
             return(
