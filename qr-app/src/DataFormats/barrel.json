@@ -1,0 +1,37 @@
+{
+    "content": {
+
+        "name": "München Helles",
+        
+        "pricing": 0,
+        
+        "value": 0,
+        
+        "unit": "BRL"
+        
+    },
+        
+    "description": {
+        
+        "volume": "",
+
+        "cliente": "",
+        
+        "coord": {
+                "lat": -8.062664,
+                "lng": -34.872825
+            }
+        
+    },
+    "meta": {
+        
+        "schema": "produto",
+        
+        "updated_at": "{'DD-MM-YYYY'}",
+        
+        "created_at": "{'DD-MM-YYYY'}",
+        
+        "id": 341592
+        
+    }
+}

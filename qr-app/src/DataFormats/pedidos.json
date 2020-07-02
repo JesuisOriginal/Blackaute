@@ -1,0 +1,27 @@
+{
+    "content": {
+  
+        "status": "Saindo Pra Entrega",
+  
+        "location_id":"",
+        
+        "receiver_id": "" 
+        
+    },
+        
+    "meta": {
+        
+        "schema": "<schema>",
+            
+        "updated_at": "{'DD-MM-YYYY'}",
+            
+        "created_at":" {'DD-MM-YYYY'}",
+            
+        "id": ""
+        
+    },
+  
+    "related":[
+        
+    ]
+  }

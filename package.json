@@ -1,20 +1,6 @@
 {
-  "name": "blackout",
-  "version": "1.0.0",
-  "description": "lol, its a geopoint sistem for tracking barrels of beer 4 some1",
-  "main": "index.js",
-  "scripts": {
-    "test": "run"
-  },
-  "keywords": [
-    "web",
-    "Firebase",
-    "Geopoint"
-  ],
-  "author": "Jesuis,Gio,Henricao",
-  "license": "GPL-3.0",
   "dependencies": {
-    "firebase-admin": "^8.12.1",
-    "require": "^2.4.20"
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5"
   }
 }
