@@ -9,7 +9,7 @@ import AddIcon from '@material-ui/icons/Add';
 // import classes from "*.module.css";
 import {Provider} from 'react-redux';
 
-
+import { Types } from '../../store/reducers/main';
 
 const useStyles = makeStyles((theme) => ({
     root: {
