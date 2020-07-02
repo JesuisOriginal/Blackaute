@@ -9,25 +9,21 @@ import AddIcon from '@material-ui/icons/Add';
 // import classes from "*.module.css";
 import {Provider} from 'react-redux';
 
-import * as Pedido from '../../DataFormats/pedidos.json';
-import {Types} from '../../store/reducers/main';
-import { products } from '../../services/db/storage/';
-import { firebase } from '../../services/db/config';
-import { useHistory } from "react-router-dom";
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        '& > *': {
+      '& > *': {
         margin: theme.spacing(1),
         width: '25ch',
-        }
+      }
     },
     paper: {
-        padding: theme.spacing(2),
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
+      padding: theme.spacing(2),
+      textAlign: 'center',
+      color: theme.palette.text.secondary,
     },
-
+    
 }));
 
 const createSkeleton = (data) => ({
@@ -57,49 +53,48 @@ const createSkeleton = (data) => ({
 });
 
 const buttonStyle = {
-        padding: "1rem",
-        right: '20rem',
-        textAlign: 'center',
-        margin: 0,
-        bottom: 'auto',
-        right: 20,
-        top: 20,
-        left: 'auto',
-        position: 'fixed',
-        // color: theme.palette.text.secondary,
+      padding: "1rem",
+      right: '20rem',
+      textAlign: 'center',
+      margin: 0,
+      bottom: 'auto',
+      right: 20,
+      top: 20,
+      left: 'auto',
+      position: 'fixed',
+      // color: theme.palette.text.secondary,
 }
 const fabStyle = {
-    margin: 0,
-    top: 'auto',
-    right: 20,
-    bottom: 20,
-    left: 'auto',
-    position: 'fixed',
+  margin: 0,
+  top: 'auto',
+  right: 20,
+  bottom: 20,
+  left: 'auto',
+  position: 'fixed',
 };
 
 const INITIAL_STATE = {
-    children:[],
+  children:[],
 };
 
 
 
 export default function Market() {
-    const classes = useStyles();
-    const [state, setState] = useState(INITIAL_STATE);
+  const classes = useStyles();
+  const [state, setState] = useState(INITIAL_STATE);
 
-    const appendChild = ()=> (
+  const appendChild = ()=> (
     setState({
-        ...state,
-        children:[
+      ...state,
+      children:[
         ...state.children,
         Products
-        ]
+      ]
     })
-    )
+  )
 
-    const dispatch = useDispatch();
-    const store = useStore();
-    const history = useHistory();
+  const dispatch = useDispatch();
+  const store = useStore();
 
     function newPedido(state) {
         var newpedido = createSkeleton({

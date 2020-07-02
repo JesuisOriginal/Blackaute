@@ -16,7 +16,7 @@ export default function Mapp(props) {
 
 
 const style = {
-    height: '500px', 
-    width: '500px',
+    height: '530px', 
+    width: '530px',
     margin: '10px'
 }
