@@ -6,8 +6,7 @@ export const Types = {
     updateBarrels: 'main/UPDATE_BARRELS',
     updateSingleBarrel: 'main/UPDATE_SINGLE_BARREL',
     addBarrel: 'main/ADD_BARREL',
-    updateLoading: 'main/UPDATE_LOADING',
-    clearBarrel: 'main/CLEAR_BARREL'
+    updateLoading: 'main/UPDATE_LOADING'
 };
 
 const INITIAL_STATE = {
@@ -40,8 +39,6 @@ export default function reducer(state = INITIAL_STATE, action) {
         case Types.addBarrel: 
             return addBarrel(state, action);
         
-        case Types.clearBarrel:
-            return clearBarrel(state);
             
         case Types.updateLoading:
             return updateLoading(state, action);
@@ -76,11 +73,6 @@ export const addRequest = (state, {data}) => ({
 export const updateBarrels = (state, {barrels}) => ({
     ...state,
     barrels
-});
-
-export const clearBarrel = (state) => ({
-    ...state,
-    barrels:[]
 });
 
 export const updateSingleBarrel = (state, {index, data}) => ({

@@ -22,8 +22,7 @@ class Reader extends React.Component {
   };
 
   render() {
-    if (this.state.lastResult !== null)
-      console.log(this.state);
+    console.log(this.state);
     return (
       <View>
         <TagReader onRead={this.handleUpdateResult} />

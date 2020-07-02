@@ -8,7 +8,7 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import image from './barrel.png';
 import { Button } from '@material-ui/core';
 import AddLocationIcon from '@material-ui/icons/AddLocation';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {setActiveOrder} from '../../store/reducers/order';
 
 const useStyles = makeStyles((theme) => ({
@@ -37,13 +37,18 @@ const useStyles = makeStyles((theme) => ({
 export default function BarrelCard(props) {
   const classes = useStyles();
   const history = useHistory();
+  const teste = useSelector(state => state.OrdersReducer.activeOrder);
 
-  // const dispatchOrder = useDispatch();
+  const dispatchOrder = useDispatch();
 
-  let gitLoc = () => {
-    console.log('essa função');
-    history.push('/map')
-    // dispatchOrder(setActiveOrder(props));
+  const gitLoc = () => {
+    console.log("Teste", teste);
+    history.push('/map',props.pedido.payload.meta.id);
+  }
+
+  const preLoad = () => {
+    console.log("pre dispatch", teste);
+    dispatchOrder(setActiveOrder(props.pedido.payload));
   }
 
   return (
@@ -59,10 +64,14 @@ export default function BarrelCard(props) {
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
                 <Typography gutterBottom variant="subtitle1">
-                  Barril EKÄUT - {props.barril.name}
+                  Pedido EKÄUT - {props.pedido.payload.meta.id}
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
-                  Volume :{/* {props.barril.description.volume} */}
+                  Endereço Entrega :
+                  {/* {props.pedido.content.status} */}
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
+                  Status : {props.pedido.payload.content.status}
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
                   Código : {Math.floor(Math.random() * 1000000)}
@@ -76,6 +85,7 @@ export default function BarrelCard(props) {
                 variant="contained"
                 color="default"
                 startIcon={<AddLocationIcon />}
+                onMouseOver = {preLoad}
                 onClick={gitLoc}
               >
                 Localização Atual

@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ['Saiu da Ekäut', 'Chegou no Bar', 'Saiu do Bar', 'Retornou a Ekäut'];
+  return ['Saindo Pra Entrega', 'Chegou no Bar', 'Saiu do Bar', 'Retornou a Ekäut'];
 }
 
 function getStepContent(step) {
@@ -45,13 +45,13 @@ function getStepContent(step) {
 
 function setStep(status) {
   switch (status) {
-    case "enviado": 
+    case "Saindo Pra Entrega": 
       return 0;
-    case "entregue":
+    case "Chegou no Bar":
       return 1;
-    case "retornado":
+    case "Saiu do Bar":
       return 2;
-    case "devolvido":
+    case "Retornou a Ekäut":
       return 3;
     default:
       return 0;

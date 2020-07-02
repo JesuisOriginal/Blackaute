@@ -46,7 +46,7 @@ class ProductsPage extends React.Component {
           <h1 style = {headerStyle}>Detalhes dos Pedidos ativos</h1>
           <FabUpdate onClick={this.handleGetProducts} loading={this.state.loading} />
           <Barrels itens={barrels} />
-          {console.log(barrels)}
+          {console.log("Eu nao estou doido", barrels)}
         </View>
         
       );

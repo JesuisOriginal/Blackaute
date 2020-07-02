@@ -9,16 +9,38 @@ const ProtoMapp = (props) => {
     const toggleBarril = useSelector(state => state.OrdersReducer.toggleBarril);
     const [selectedLoc, setSelectedLoc] = useState(null);
 
+    const defaultLoc = {
+        lat: -8.059487,
+        lng: -34.872351
+    }
+
     const createCenter = () => {
-        let lat = 0;
-        let lng = 0;
-        let l = barris.length;
-        for(let i = 0; i < l; i++) {
-            lat += barris[i].description.coord.lat;
-            lng += barris[i].description.coord.lng;
+        try{
+            let lat = 0;
+            let lng = 0;
+            let l = barris.length;
+            for(let i = 0; i < l; i++) {
+                lat += barris[i].description.coords.lat;
+                lng += barris[i].description.coords.lng;
+            }
+            return {lat : (lat/l) , lng: (lng/l)}
+        }catch(e){
+            console.log(e);
         }
-    
-        return {lat : (lat/l) , lng: (lng/l)}
+        return defaultLoc;
+    }
+
+    const getPos = (item) => {
+        try{
+            const out = {
+                lat: item.description.coords.lat,
+                lng: item.description.coords.lng
+            }
+            return out;
+        }catch(e){
+            console.log(e);
+        }
+        return defaultLoc;
     }
 
     let center = createCenter();
@@ -31,10 +53,7 @@ const ProtoMapp = (props) => {
             {barris.map( item => (
                 <Marker 
                     key={item.meta.id}
-                    position={{
-                        lat: item.description.coord.lat,
-                        lng: item.description.coord.lng
-                    }}
+                    position={getPos(item)}
                     onClick={() => {
                         setSelectedLoc(item);
                     }}
@@ -43,8 +62,8 @@ const ProtoMapp = (props) => {
             {selectedLoc && (
                 <InfoWindow 
                     position={{
-                        lat: selectedLoc.description.coord.lat,
-                        lng: selectedLoc.description.coord.lng
+                        lat: selectedLoc.description.coords.lat,
+                        lng: selectedLoc.description.coords.lng
                     }}
                     onCloseClick={() => {
                         setSelectedLoc(null);
