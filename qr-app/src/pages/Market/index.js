@@ -141,17 +141,17 @@ export default function Market() {
     }
 
     async function handleCompra()  {
-        var pedidoToDispatch =  createOrder("Boobs a milanesa");
-        console.log("Sending...", pedidoToDispatch);
-        dispatch({type: Types.addRequest, data: pedidoToDispatch});
+        var payload =  createOrder("Boobs a milanesa");
+        console.log("Sending...", payload);
+        dispatch({type: Types.addRequest, data: payload});
 
         // TODO: dar dispatch num {type: "market/CLEAR_ORDER"}
 
-        var newDoc = products.doc(pedidoToDispatch.meta.id);
+        var newDoc = products.doc(payload.meta.id);
         
         await newDoc
         .set({
-            pedidoToDispatch,
+            payload,
         })
         .then(function () {
             console.log("Pedido Added, check Firebase Console...");

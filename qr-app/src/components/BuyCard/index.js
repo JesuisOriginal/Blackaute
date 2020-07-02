@@ -41,10 +41,7 @@ const createSkeleton = (data) => ({
   description: {
       volume: "",
       cliente: "",
-      coord: {
-              "lat": -8.062664,
-              "lng": -34.872825
-          }
+
   },
   meta: {
       schema: "produto",
@@ -74,10 +71,6 @@ const BARRIL_SKELETON = {
 
         cliente: "",
         
-        coord: {
-                "lat": -8.062664,
-                "lng": -34.872825
-            }
         
     },
     meta: {
