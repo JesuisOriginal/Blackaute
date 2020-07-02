@@ -171,11 +171,11 @@ export default function BuyCard(props) {
 
             if (state.qtd > 1) {
                 for (var i = 0; i < state.qtd; i++) {
-                    dispatch({type: "market/ADD_ORDER", payload: BarrelJSON });
+                    await dispatch({type: "market/ADD_ORDER", orders: {payload: BarrelJSON}});
                     console.log("state from loop", store.getState());
                 }
             } else {
-                dispatch({type: "market/ADD_ORDER", payload: {order: BarrelJSON} });
+                await dispatch({type: "market/ADD_ORDER", orders: {payload: BarrelJSON}});
                 console.log("state from else", store.getState());
             }
 
@@ -333,86 +333,61 @@ export default function BuyCard(props) {
 
 var temp = 
 {
-    orders:  [
+    orders: [
         {
-          'default': {
-            content: {
-              name: 'czech',
-              pricing: 3150,
-              value: 70,
-              unit: 'BRL'
-            },
-            description: {
-              volume: '45',
-              cliente: 'Agluglu',
-              coord: {
-                lat: -8.062664,
-                lng: -34.872825
-              }
-            },
-            meta: {
-              schema: 'produto',
-              updated_at: '{\'DD-MM-YYYY\'}',
-              created_at: '{\'DD-MM-YYYY\'}',
-              id: 341592
+            payload: {
+                    'default': {
+                        content: {
+                            name: 'munich',
+                            pricing: 8000,
+                            value: 80,
+                            unit: 'BRL'
+                        },
+                        description: {
+                            volume: '10',
+                            cliente: 'ceu',
+                            coord: {
+                            lat: -8.062664,
+                            lng: -34.872825
+                            }
+                        },
+                        meta: {
+                            schema: 'produto',
+                            updated_at: '{\'DD-MM-YYYY\'}',
+                            created_at: '{\'DD-MM-YYYY\'}',
+                            id: 341592
+                        }
+                    }
             }
-          }
         },
+
         {
-          'default': {
-            content: {
-              name: 'czech',
-              pricing: 3150,
-              value: 70,
-              unit: 'BRL'
-            },
-            description: {
-              volume: '45',
-              cliente: 'Agluglu',
-              coord: {
-                lat: -8.062664,
-                lng: -34.872825
-              }
-            },
-            meta: {
-              schema: 'produto',
-              updated_at: '{\'DD-MM-YYYY\'}',
-              created_at: '{\'DD-MM-YYYY\'}',
-              id: 341592
+            payload: {
+                'default': {
+                    content: {
+                        name: 'munich',
+                        pricing: 8000,
+                        value: 80,
+                        unit: 'BRL'
+                    },
+                    description: {
+                        volume: '10',
+                        cliente: 'ceu',
+                        coord: {
+                        lat: -8.062664,
+                        lng: -34.872825
+                        }
+                    },
+                    meta: {
+                        schema: 'produto',
+                        updated_at: '{\'DD-MM-YYYY\'}',
+                        created_at: '{\'DD-MM-YYYY\'}',
+                        id: 341592
+                    }
+                }
             }
-          }
         }
-      ]
+  ]
 }
 
-console.log("temp", temp.orders[0].default);
-
-var temp2 = {
-    type: 'market/ADD_ORDER',
-    orders: {
-      payload: {
-        'default': {
-          content: {
-            name: 'apa-1',
-            pricing: 500,
-            value: 50,
-            unit: 'BRL'
-          },
-          description: {
-            volume: '10',
-            cliente: 'Bar do Gordo',
-            coord: {
-              lat: -8.062664,
-              lng: -34.872825
-            }
-          },
-          meta: {
-            schema: 'produto',
-            updated_at: '{\'DD-MM-YYYY\'}',
-            created_at: '{\'DD-MM-YYYY\'}',
-            id: 341592
-          }
-        }
-      }
-    }
-  }
+console.log("temp", temp.orders[0].payload.default);

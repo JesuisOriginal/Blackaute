@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState} from 'react';
+import {useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -7,6 +8,8 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import image from './barrel.png';
 import { Button } from '@material-ui/core';
 import AddLocationIcon from '@material-ui/icons/AddLocation';
+import { useDispatch } from 'react-redux';
+import {setActiveOrder} from '../../store/reducers/order';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,9 +36,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function BarrelCard(props) {
   const classes = useStyles();
+  const history = useHistory();
+
+  // const dispatchOrder = useDispatch();
 
   let gitLoc = () => {
-    console.log('essa função deve encaminhar para uma rota que mostre um mapa e a posição autal do barril');
+    console.log('essa função');
+    history.push('/map')
+    // dispatchOrder(setActiveOrder(props));
   }
 
   return (
@@ -53,11 +61,14 @@ export default function BarrelCard(props) {
                 <Typography gutterBottom variant="subtitle1">
                   Barril EKÄUT - {props.barril.name}
                 </Typography>
-                <Typography variant="body2" gutterBottom>
-                  {props.rem}
+                <Typography variant="body2" color="textSecondary">
+                  Volume :{/* {props.barril.description.volume} */}
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
-                  ID: {Math.floor(Math.random() * 1000000)}
+                  Código : {Math.floor(Math.random() * 1000000)}
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
+                  Data de Envio : (DD - MM - AA)
                 </Typography>
               </Grid>
               <Grid item>

@@ -39,14 +39,14 @@ class ProductsPage extends React.Component {
   render() {
     const {barrels} = this.props;
     return (
-       
         <View>
           <style>
               @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
           </style>
-          <h1 style = {headerStyle}>Detalhes de Baris ativos</h1>
+          <h1 style = {headerStyle}>Detalhes dos Pedidos ativos</h1>
           <FabUpdate onClick={this.handleGetProducts} loading={this.state.loading} />
           <Barrels itens={barrels} />
+          {console.log(barrels)}
         </View>
         
       );

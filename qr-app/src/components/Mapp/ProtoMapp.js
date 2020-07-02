@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {GoogleMap , withScriptjs, withGoogleMap, Marker, InfoWindow } from 'react-google-maps';
 import * as data from './data.json';
-import { useSelector , useStore } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const ProtoMapp = (props) => {
 
