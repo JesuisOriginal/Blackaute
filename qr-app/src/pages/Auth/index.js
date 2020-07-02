@@ -1,33 +1,83 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import auth from '../../services/db/auth';
+import {Types} from './redux/reducer';
 
-import {Types} from '../../store/reducers/main';
+import {Grid, Box} from '@material-ui/core';
+import {Container, SidebarContainer, MainContainer} from './styles';
+import AuthSidebar from './components/AuthSidebar';
+import LoginInput from './components/LoginInput';
+
+const INTIAL_STATE = {
+  credentials: {},
+  register:{}
+}
 
 class AuthPage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = INTIAL_STATE;
+    }
 
-    handleLogin = () => {
-        const {dispatch} = this.props;
+    handleUpdate = (category, label, value) => (this.setState({
+      ...this.state,
+      [`${category}`]:{
+        ...this.state[`${category}`],
+        [`${label}`]: value
+      }
+    }))
+
+    handleChange = ({target}) => {
+      const {value, id} = target;
+      this.handleUpdate('credentials', id, value)
+      console.log(id,value);
+    }
+
+    handleLogin = (data) => {
+      const {history, login} = this.props;
+      login(data);
+      history.push('/');
+    }
+    
+    handleSubmit = () => {
+        auth.login(this.state.credentials, {onSuccess: this.handleLogin});
     };
 
     componentDidMount() {
-        const {user, history} = this.props;
+        const {logged_in, history} = this.props;
+        console.log('Auth',this.props);
         
-        if(user.username) {
+        if(logged_in) {
             history.push('/');
         }
     }
 
+    //teste@teste.com teste123
+
     render() {
-        console.log(this.props)
+        console.log('auth',this.props)
         return(
-            <></>
+          <Container>
+            <SidebarContainer>
+              <AuthSidebar onReturn={() => null}>
+                <LoginInput onChange={this.handleChange} onSubmit={this.handleSubmit} />
+              </AuthSidebar>
+            </SidebarContainer>
+            <MainContainer>
+            </MainContainer>
+          </Container>
         )
     }
 };
 
-const mapStateToProps = ({MainReducer}) => ({
-    user: MainReducer.user,
-    loading: MainReducer.loading
+const mapStateToProps = ({AuthReducer}) => ({
+    userData: AuthReducer.userData,
+    logged_in: AuthReducer.logged_in
 });
 
-export default connect(mapStateToProps)(AuthPage);
+const mapDispatchToProps = dispatch => ({
+    login: ({user}) => dispatch({type:Types.login, userData: user }),
+    setLoading: (loading) => dispatch({type: Types.setUpdateLoading, loading}),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuthPage);

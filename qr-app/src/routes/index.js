@@ -11,6 +11,7 @@ import Market from '../pages/Market';
 
 import {Grid} from '@material-ui/core';
 import {Home, CropFree, Toc, ShoppingCart } from '@material-ui/icons';
+import { connect } from "react-redux";
 
 const DEFAULT_ROUTES = [
   {
@@ -56,7 +57,7 @@ const DEFAULT_ROUTES = [
   }
 ];
 
-export default class RootRoute extends React.Component {
+class RootRoute extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -79,13 +80,14 @@ export default class RootRoute extends React.Component {
   componentDidMount() {
     this.handleSetScreenType ({
       width: window.screen.width,
-      height: window.screen.height
+      height: window.screen.height,
     });
   }
 
   render() {
     const {routes, screenType} = this.state;
-    console.log(screenType)
+    const {logged_in} = this.props;
+    // console.log('route', this.props)
     return (
       <Router>
         <Switch>
@@ -93,8 +95,17 @@ export default class RootRoute extends React.Component {
             <Route key={`route_${index}`} path={route.path} exact={route.exact} component={route.component} />
           ))}
         </Switch>
-        <BottomNav {...this.state} screenType={screenType}/>
+        {logged_in && (
+          <BottomNav {...this.state} screenType={screenType}/>
+        )}
       </Router>
     );
   }
 };
+
+const mapStateToProps = ({AuthReducer}) => {
+  const {logged_in, userData} = AuthReducer; 
+  return ({logged_in, userData});
+}
+
+export default connect(mapStateToProps)(RootRoute);
