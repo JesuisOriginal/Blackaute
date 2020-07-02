@@ -90,7 +90,7 @@ class RootRoute extends React.Component {
     const {routes, screenType} = this.state;
     const {logged_in} = this.props;
     // console.log('route', this.props)
-    const mock = true;
+    const mock = false;
     return (
       <Router>
         <Container screenType={screenType}>
