@@ -39,7 +39,7 @@ function getStepContent(step) {
     case 3:
       return 'Voltou Ekäut';
     default:
-      return 'Unknown step';
+      return 'Em direção do bar';
   }
 }
 
@@ -54,7 +54,7 @@ function setStep(status) {
     case "devolvido":
       return 3;
     default:
-      return 4;
+      return 0;
   }
 }
 

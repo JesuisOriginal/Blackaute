@@ -12,7 +12,12 @@ const INITIAL_STATE = {
 export default function reducer(state = INITIAL_STATE, action) {
     switch(action.type) {
         case 'market/ADD_ORDER': {
-            return addBarrel(state, action );
+            console.log("state", state);
+            console.log("action", action);
+            console.log("payload", action.payload);
+
+            // return addBarrel(state, action.payload );
+            return addBarrel(state, action);
         }
         case 'GET_ORDER':
             return state.orders;
@@ -21,9 +26,15 @@ export default function reducer(state = INITIAL_STATE, action) {
     }
 };
 
-export const addBarrel = (state, { orders }) => ({
+export const addBarrel = (state,  {order} ) => ({
+    // ...state,
+    // orders:[...state.orders, order]
+    // orders: state.orders.concat(order),
     ...state,
-    orders:[...state.orders, orders]
+    orders: [
+        ...state.orders,
+        order
+    ]
 });
 
 // export const getOrders = (state, { orders })
